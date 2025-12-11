@@ -14,7 +14,7 @@ export default function LeftComponent() {
             <img src={Logo} alt="" className="w-10 h-10" />
             <span
               className={`${
-                theme == "light" ? "" : "text-white"
+                theme == "light" ? "text-[#202224]" : "text-white"
               } text-[24px] font-bold text-center`}
             >
               LibraSpace
@@ -28,7 +28,7 @@ export default function LeftComponent() {
               className={({ isActive }) =>
                 `${isActive ? "bg-[#4880FF] text-white" : ""} 
      ${theme === "light" ? "text-black hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#4880FF] duration-200 
+     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
      flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
               }
             >
@@ -40,12 +40,12 @@ export default function LeftComponent() {
               to="/libraries"
               className={({ isActive }) =>
                 `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-black hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#4880FF] duration-200 
-     flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
+     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
+     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
+     flex gap-4 text-[16px] group font-semibold mb-2 w-full text-center`
               }
             >
-              <i className="bi bi-journal-bookmark-fill"></i>
+              <i className={`bi bi-journal-bookmark-fill`}></i>
               Libraries
             </NavLink>
 
@@ -53,8 +53,8 @@ export default function LeftComponent() {
               to="/addlibrary"
               className={({ isActive }) =>
                 `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-black hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#4880FF] duration-200 
+     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
+     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
      flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
               }
             >
@@ -65,8 +65,8 @@ export default function LeftComponent() {
               to="/profile"
               className={({ isActive }) =>
                 `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-black hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#4880FF] duration-200 
+     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
+     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
      flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
               }
             >
