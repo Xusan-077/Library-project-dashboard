@@ -13,8 +13,8 @@ export const useAuthStore = create((set, get) => ({
     }
   },
 
-  setUser: (userData) => {
-    set({ user: userData });
+  setUser: (userAction) => {
+    set({ user: userAction });
   },
 
   setIsAuth: () => {

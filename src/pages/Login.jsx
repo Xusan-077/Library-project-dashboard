@@ -37,12 +37,12 @@ export default function Login() {
       return res?.data;
     },
     onSuccess: (data) => {
-      toast.success("Login to profile success");
       login(data);
 
       navigate("/", {
         replace: true,
       });
+      toast.success("Login to profile success");
     },
     onError: (err) => {
       toast.error(err.message || "Failed to login profile");

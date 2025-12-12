@@ -31,7 +31,7 @@ export default function Layout() {
         <Header />
       </header>
 
-      <main className="max-[1200px]:ml-0 p-[30px] max-[1200px]:w-full ml-60 mt-24 w-[calc(100%-18rem)]  max-[1200px]:mb-25">
+      <main className="p-[30px] ml-60 mt-24 max-[1200px]:mb-25">
         <Outlet />
       </main>
     </div>

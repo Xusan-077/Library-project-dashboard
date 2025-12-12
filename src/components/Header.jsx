@@ -35,213 +35,211 @@ export default function Header() {
       setUser(userAction);
       setIsAuth(true);
     }
-  }, [userAction, access, refresh]);
+  }, [access, refresh]);
 
   return (
-    <header className="">
-      <div className="flex items-center justify-between p-5">
-        <button>
-          <i
-            className={`${
-              theme == "light" ? "" : "text-white"
-            } cursor-pointer text-[30px] bi bi-list`}
-          ></i>
+    <div className="flex items-center justify-between p-5">
+      <button>
+        <i
+          className={`${
+            theme == "light" ? "" : "text-white"
+          } cursor-pointer text-[30px] bi bi-list`}
+        ></i>
+      </button>
+
+      <div className="flex items-center gap-5">
+        <button
+          onClick={() => setTheme()}
+          className="rounded-[50%] w-[35px] flex items-center justify-center cursor-pointer h-[35px]"
+        >
+          {theme == "light" ? (
+            <i className="text-[18px] bi bi-sun"></i>
+          ) : (
+            <i
+              className={`${
+                theme == "light" ? "" : "text-white"
+              } text-[18px] bi bi-moon-fill`}
+            ></i>
+          )}
         </button>
 
-        <div className="flex items-center gap-5">
-          <button
-            onClick={() => setTheme()}
-            className="rounded-[50%] w-[35px] flex items-center justify-center cursor-pointer h-[35px]"
-          >
-            {theme == "light" ? (
-              <i class="text-[18px] bi bi-sun"></i>
-            ) : (
-              <i
-                class={`${
-                  theme == "light" ? "" : "text-white"
-                } text-[18px] bi bi-moon-fill`}
-              ></i>
-            )}
-          </button>
-
-          <div className="relative">
-            <div className="">
-              <div
-                onClick={() =>
-                  langModal ? setLangModal(false) : setLangModal(true)
-                }
-                className="flex cursor-pointer items-center gap-5"
-              >
-                <div className="flex items-center gap-3">
-                  <img
-                    src={
-                      lang == "uz"
-                        ? uz
-                        : lang == "en"
-                        ? en
-                        : lang == "ru"
-                        ? ru
-                        : ""
-                    }
-                    alt=""
-                    className="w-11 h-[30px]"
-                  />
-                  <span
-                    className={`${
-                      theme == "light" ? "" : "text-[#F2F2F2]"
-                    } text-[14px]`}
-                  >
-                    {lang == "uz"
-                      ? "Uzbek"
+        <div className="relative">
+          <div className="">
+            <div
+              onClick={() =>
+                langModal ? setLangModal(false) : setLangModal(true)
+              }
+              className="flex cursor-pointer items-center gap-5"
+            >
+              <div className="flex items-center gap-3">
+                <img
+                  src={
+                    lang == "uz"
+                      ? uz
                       : lang == "en"
-                      ? "English"
+                      ? en
                       : lang == "ru"
-                      ? "Russian"
-                      : ""}
-                  </span>
-                </div>
-                <div className="">
-                  <i
-                    className={`${
-                      theme == "light" ? "text-[#646464]" : "text-[#D5D5D5]"
-                    }  bi bi-caret-down`}
-                  ></i>
-                </div>
+                      ? ru
+                      : ""
+                  }
+                  alt=""
+                  className="w-11 h-[30px]"
+                />
+                <span
+                  className={`${
+                    theme == "light" ? "" : "text-[#F2F2F2]"
+                  } text-[14px]`}
+                >
+                  {lang == "uz"
+                    ? "Uzbek"
+                    : lang == "en"
+                    ? "English"
+                    : lang == "ru"
+                    ? "Russian"
+                    : ""}
+                </span>
+              </div>
+              <div className="">
+                <i
+                  className={`${
+                    theme == "light" ? "text-[#646464]" : "text-[#D5D5D5]"
+                  }  bi bi-caret-down`}
+                ></i>
               </div>
             </div>
-            {langModal && (
+          </div>
+          {langModal && (
+            <div
+              className={`${
+                theme == "light" ? "bg-white" : "bg-[#273142FF]"
+              } absolute z-1000 top-[45px]  w-[250px] shadow-2xl left-[-75px] rounded-lg p-4`}
+            >
+              <div className="">
+                <span
+                  className={`${
+                    theme == "light" ? "" : "text-gray-200"
+                  } block border-b -mx-4 px-4 border-b-[#979797] mb-3 pb-3`}
+                >
+                  Select Language
+                </span>
+              </div>
               <div
-                className={`${
-                  theme == "light" ? "bg-white" : "bg-[#273142FF]"
-                } absolute z-1000 top-[45px]  w-[250px] shadow-2xl left-[-75px] rounded-lg p-4`}
+                onClick={() => {
+                  setLang("en");
+                  setLangModal(false);
+                }}
+                className="flex p-[15px_0] cursor-pointer items-center justify-between"
               >
-                <div className="">
+                <div className="flex items-center gap-3">
+                  <img src={en} alt="" className="w-11 h-[30px]" />
                   <span
                     className={`${
-                      theme == "light" ? "" : "text-gray-200"
-                    } block border-b -mx-4 px-4 border-b-[#979797] mb-3 pb-3`}
+                      theme == "light" ? "" : "text-gray-300"
+                    } text-[14px]`}
                   >
-                    Select Language
+                    English
                   </span>
                 </div>
-                <div
-                  onClick={() => {
-                    setLang("en");
-                    setLangModal(false);
-                  }}
-                  className="flex p-[15px_0] cursor-pointer items-center justify-between"
-                >
-                  <div className="flex items-center gap-3">
-                    <img src={en} alt="" className="w-11 h-[30px]" />
-                    <span
+                {lang == "en" ? (
+                  <div className="">
+                    <i
                       className={`${
-                        theme == "light" ? "" : "text-gray-300"
-                      } text-[14px]`}
-                    >
-                      English
-                    </span>
+                        theme == "light" ? "" : "text-white"
+                      } text-[20px] bi bi-check-lg`}
+                    ></i>
                   </div>
-                  {lang == "en" ? (
-                    <div className="">
-                      <i
-                        className={`${
-                          theme == "light" ? "" : "text-white"
-                        } text-[20px] bi bi-check-lg`}
-                      ></i>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div
-                  onClick={() => {
-                    setLang("uz");
-                    setLangModal(false);
-                  }}
-                  className="flex p-[15px_0] cursor-pointer items-center justify-between"
-                >
-                  <div className="flex items-center gap-3">
-                    <img src={uz} alt="" className="w-11 h-[30px]" />
-                    <span
-                      className={`${
-                        theme == "light" ? "" : "text-gray-300"
-                      } text-[14px]`}
-                    >
-                      Uzbek
-                    </span>
-                  </div>
-                  {lang == "uz" ? (
-                    <div className="">
-                      <i
-                        className={`${
-                          theme == "light" ? "" : "text-white"
-                        } text-[20px] bi bi-check-lg`}
-                      ></i>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div
-                  onClick={() => {
-                    setLang("ru");
-                    setLangModal(false);
-                  }}
-                  className="flex p-[15px_0] cursor-pointer items-center justify-between"
-                >
-                  <div className="flex items-center gap-3">
-                    <img src={ru} alt="" className="w-11 h-[30px]" />
-                    <span
-                      className={`${
-                        theme == "light" ? "" : "text-gray-300"
-                      } text-[14px]`}
-                    >
-                      Russian
-                    </span>
-                  </div>
-                  {lang == "ru" ? (
-                    <div className="">
-                      <i
-                        className={`${
-                          theme == "light" ? "" : "text-white"
-                        } text-[20px] bi bi-check-lg`}
-                      ></i>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
+                ) : (
+                  ""
+                )}
               </div>
-            )}
-          </div>
+              <div
+                onClick={() => {
+                  setLang("uz");
+                  setLangModal(false);
+                }}
+                className="flex p-[15px_0] cursor-pointer items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <img src={uz} alt="" className="w-11 h-[30px]" />
+                  <span
+                    className={`${
+                      theme == "light" ? "" : "text-gray-300"
+                    } text-[14px]`}
+                  >
+                    Uzbek
+                  </span>
+                </div>
+                {lang == "uz" ? (
+                  <div className="">
+                    <i
+                      className={`${
+                        theme == "light" ? "" : "text-white"
+                      } text-[20px] bi bi-check-lg`}
+                    ></i>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+              <div
+                onClick={() => {
+                  setLang("ru");
+                  setLangModal(false);
+                }}
+                className="flex p-[15px_0] cursor-pointer items-center justify-between"
+              >
+                <div className="flex items-center gap-3">
+                  <img src={ru} alt="" className="w-11 h-[30px]" />
+                  <span
+                    className={`${
+                      theme == "light" ? "" : "text-gray-300"
+                    } text-[14px]`}
+                  >
+                    Russian
+                  </span>
+                </div>
+                {lang == "ru" ? (
+                  <div className="">
+                    <i
+                      className={`${
+                        theme == "light" ? "" : "text-white"
+                      } text-[20px] bi bi-check-lg`}
+                    ></i>
+                  </div>
+                ) : (
+                  ""
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
-          <div onClick={() => navigate("/profile")} className="">
-            <div className="flex cursor-pointer items-center gap-3">
-              <i
+        <div onClick={() => navigate("/profile")} className="">
+          <div className="flex cursor-pointer items-center gap-3">
+            <i
+              className={`${
+                theme == "light" ? "" : "text-gray-300"
+              } text-[30px] bi bi-person-circle`}
+            ></i>
+            <div className="">
+              <h2
                 className={`${
-                  theme == "light" ? "" : "text-gray-300"
-                } text-[30px] bi bi-person-circle`}
-              ></i>
-              <div className="">
-                <h2
-                  className={`${
-                    theme == "light" ? "text-black" : "text-gray-200"
-                  } text-[14px] font-bold`}
-                >
-                  {user?.name || "User"}
-                </h2>
-                <h3
-                  className={`${
-                    theme == "light" ? "text-black" : "text-gray-300"
-                  } text-[14px] font-semibold`}
-                >
-                  Admin
-                </h3>
-              </div>
+                  theme == "light" ? "text-black" : "text-gray-200"
+                } text-[14px] font-bold`}
+              >
+                {user?.name || "User"}
+              </h2>
+              <h3
+                className={`${
+                  theme == "light" ? "text-black" : "text-gray-300"
+                } text-[14px] font-semibold`}
+              >
+                Admin
+              </h3>
             </div>
           </div>
         </div>
       </div>
-    </header>
+    </div>
   );
 }

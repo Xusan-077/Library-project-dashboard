@@ -32,7 +32,7 @@ export default function LeftComponent() {
      flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
               }
             >
-              <i class="bi bi-journal"></i>
+              <i className="bi bi-journal"></i>
               Books
             </NavLink>
 
@@ -58,7 +58,7 @@ export default function LeftComponent() {
      flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
               }
             >
-              <i class="bi bi-building-add"></i>
+              <i className="bi bi-building-add"></i>
               Add Library
             </NavLink>
             <NavLink
@@ -70,7 +70,7 @@ export default function LeftComponent() {
      flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
               }
             >
-              <i class="bi bi-person-lines-fill"></i>
+              <i className="bi bi-person-lines-fill"></i>
               Profile
             </NavLink>
           </nav>
