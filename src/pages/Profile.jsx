@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "../store/useAuthStore";
 import { useThemeStore } from "../store/useThemeStore";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Profile() {
   const { theme } = useThemeStore();
-  const { user, setIsAuth, setUser } = useAuthStore();
+  const { user, setIsAuth, setUser, logout } = useAuthStore();
+  const [logOut, setLogOut] = useState(false);
 
   const { data: userAction } = useQuery({
     queryFn: async () => {
@@ -15,6 +18,8 @@ export default function Profile() {
     },
     queryKey: ["user Data"],
   });
+
+  const navigate = useNavigate();
 
   const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
@@ -28,6 +33,45 @@ export default function Profile() {
 
   return (
     <div className="">
+      {logOut && (
+        <div className="fixed top-0 left-0 bg-[#0007] w-full flex items-center justify-center h-screen z-200">
+          <div className={`bg-white max-w-[400px] w-full p-[25px] rounded-lg`}>
+            <div className="flex justify-between items-center border-b border-b-[#e5e7eb] mb-2">
+              <span className={`text-[18px]`}>Log out</span>
+              <span
+                onClick={() => setLogOut(false)}
+                className={`cursor-pointer text-[25px]`}
+              >
+                &times;
+              </span>
+            </div>
+            <div className="">
+              <p className="mb-3 text-[18px] text-center">
+                Are you sure to log out
+              </p>
+              <div className="flex items-center gap-2 justify-end">
+                <button
+                  onClick={() => {
+                    toast.success("Success log out");
+                    logout();
+                    navigate("/login");
+                  }}
+                  className="cursor-pointer p-[8px_20px] bg-red-500 text-white rounded-lg"
+                >
+                  log out
+                </button>
+                <button
+                  onClick={() => setLogOut(false)}
+                  className="cursor-pointer p-[8px_20px] bg-gray-400 text-white rounded-lg"
+                >
+                  cancle
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="">
         <h2
           className={`${
@@ -59,7 +103,10 @@ export default function Profile() {
                 </span>
                 <span className="text-white text-[16px]">Edit Profile</span>
               </button>
-              <button className="p-[8px_20px] flex items-center gap-3 cursor-pointer bg-red-700 rounded-lg">
+              <button
+                onClick={() => setLogOut(true)}
+                className="p-[8px_20px] flex items-center gap-3 cursor-pointer bg-red-700 rounded-lg"
+              >
                 <span className="text-[16px]">
                   <i className="text-white text-[16px] bi bi-box-arrow-right"></i>
                 </span>

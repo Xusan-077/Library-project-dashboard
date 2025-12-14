@@ -1,8 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { useThemeStore } from "../store/useThemeStore";
+import { useFavoriteStore } from "../store/useFavoriteStore";
 
 export default function BookItem({ book }) {
   const { theme } = useThemeStore();
+  const { FavoriteBooks, toggleBookToFavorite } = useFavoriteStore();
+
   const navigate = useNavigate();
 
   return (
@@ -17,12 +20,20 @@ export default function BookItem({ book }) {
       <button
         onClick={(e) => {
           e.stopPropagation();
+
+          toggleBookToFavorite(book);
         }}
         className={`${
           theme == "light" ? "" : "text-gray-300"
         } text-[14px] w-full cursor-pointer font-bold p-5`}
       >
-        <i className={`bi bi-heart text-[16px]`}></i>
+        <i
+          className={`bi ${
+            FavoriteBooks.find((el) => el.id == book?.id)
+              ? "bi bi-heart-fill text-red-500"
+              : "bi bi-heart"
+          } text-[16px]`}
+        ></i>
       </button>
       <h2
         className={`${

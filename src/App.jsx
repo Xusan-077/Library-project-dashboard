@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import LibraryDetailPage from "./pages/LibraryDetailPage";
 import BookDetailPage from "./pages/BookDetailPage";
 import { ToastContainer } from "react-toastify";
+import Favorites from "./pages/Favorites";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route path="/" element={<Books />} />
           <Route path="/books" element={<Books />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/book/:bookId" element={<BookDetailPage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/libraries" element={<Libraries />} />

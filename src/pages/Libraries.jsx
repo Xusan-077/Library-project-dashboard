@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useThemeStore } from "../store/useThemeStore";
 import { API } from "../../API/API";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import LibraryItem from "../components/LibraryItem";
 import Sikleton from "../components/Sikleton";
 
@@ -10,6 +10,8 @@ export default function Libraries() {
   const [tabs, setTabs] = useState("Active");
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+
+  const [activeItemId, setActiveItemId] = useState(null);
 
   const pageSize = 9;
 
@@ -158,13 +160,20 @@ export default function Libraries() {
                     theme == "light"
                       ? "bg-[#FCFDFD] border-b-[#D5D5D5] "
                       : "bg-[#323D4EFF] border-none"
-                  } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_3fr_150px_120px] items-center`}
+                  } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_3fr_150px_120px_100px] items-center`}
                 >
-                  {["Like", "NAME", "ADDRESS", "TOTAL", "STATUS"].map((el) => (
+                  {[
+                    "Like",
+                    "NAME",
+                    "ADDRESS",
+                    "TOTAL",
+                    "STATUS",
+                    "ACTIONS",
+                  ].map((el) => (
                     <span
                       key={el}
-                      className={`${
-                        theme == "light" ? "" : "text-gray-300"
+                      className={`${theme == "light" ? "" : "text-gray-300"} ${
+                        el == "ACTIONS" ? "text-center" : ""
                       } px-4 py-3 text-[14px] font-bold`}
                     >
                       {el}
@@ -179,7 +188,12 @@ export default function Libraries() {
                     ))
                   ) : LibrariesSort.length ? (
                     pagination.map((el) => (
-                      <LibraryItem key={el.id} library={el} />
+                      <LibraryItem
+                        activeItemId={activeItemId}
+                        setActiveItemId={setActiveItemId}
+                        key={el.id}
+                        library={el}
+                      />
                     ))
                   ) : (
                     <div className="flex h-[500px] items-center justify-center gap-3">

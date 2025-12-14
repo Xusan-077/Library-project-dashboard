@@ -35,7 +35,6 @@ export default function LeftComponent() {
               <i className="bi bi-journal"></i>
               Books
             </NavLink>
-
             <NavLink
               to="/libraries"
               className={({ isActive }) =>
@@ -48,7 +47,18 @@ export default function LeftComponent() {
               <i className={`bi bi-journal-bookmark-fill`}></i>
               Libraries
             </NavLink>
-
+            <NavLink
+              to="/favorites"
+              className={({ isActive }) =>
+                `${isActive ? "bg-[#4880FF] text-white" : ""} 
+     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
+     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
+     flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
+              }
+            >
+              <i className="bi bi-star"></i>
+              Favorites
+            </NavLink>
             <NavLink
               to="/addlibrary"
               className={({ isActive }) =>
