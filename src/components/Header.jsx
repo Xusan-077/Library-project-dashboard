@@ -50,15 +50,15 @@ export default function Header() {
       <div className="flex items-center gap-5">
         <button
           onClick={() => setTheme()}
-          className="rounded-[50%] w-[35px] flex items-center justify-center cursor-pointer h-[35px]"
+          className="rounded-[50%] w-[35px] flex  transition-all duration-300 items-center justify-center cursor-pointer h-[35px]"
         >
           {theme == "light" ? (
-            <i className="text-[18px] bi bi-sun"></i>
+            <i className="text-[18px]  transition-all duration-300 bi bi-sun"></i>
           ) : (
             <i
               className={`${
                 theme == "light" ? "" : "text-white"
-              } text-[18px] bi bi-moon-fill`}
+              } text-[18px]  transition-all duration-300 bi bi-moon-fill`}
             ></i>
           )}
         </button>

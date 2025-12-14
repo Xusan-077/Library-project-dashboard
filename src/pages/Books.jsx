@@ -8,6 +8,7 @@ import Sikleton from "../components/Sikleton";
 export default function Libraries() {
   const { theme } = useThemeStore();
   const [tabs, setTabs] = useState("All Books");
+  const [search, setSearch] = useState("");
 
   const { data: books, isLoading: librariesLoading } = useQuery({
     queryFn: async () => {
@@ -19,10 +20,18 @@ export default function Libraries() {
     queryKey: ["books"],
   });
 
-  const LibrariesSort = (() => {
+  const BookssSort = (() => {
     if (!books) return [];
 
     const list = [...books];
+
+    if (search !== "") {
+      const filtered = list.filter((el) =>
+        el.name.toLowerCase().includes(search.trim().toLowerCase())
+      );
+
+      return filtered;
+    }
 
     if (tabs === "All Books") {
       return list;
@@ -41,12 +50,12 @@ export default function Libraries() {
 
   const [page, setPage] = useState(1);
   const pageSize = 8;
-  const totalPage = LibrariesSort?.length;
+  const totalPage = BookssSort?.length;
 
   const start = pageSize * page;
   const end = start + pageSize;
 
-  const pagination = LibrariesSort?.slice(start, end);
+  const pagination = BookssSort?.slice(start, end);
 
   return (
     <div className="">
@@ -62,51 +71,76 @@ export default function Libraries() {
         <div className="">
           <div className="">
             <div className="">
-              <div
-                className={`${
-                  theme == "light"
-                    ? "bg-white border-gray-300"
-                    : "border-gray-600"
-                } grid border  rounded-lg mb-6 grid-cols-[50px_1fr_1fr_1fr] max-w-[700px] w-full`}
-              >
+              <div className="flex items-center justify-between mb-6 ">
                 <div
                   className={`${
                     theme == "light"
-                      ? "border-l-gray-300"
-                      : "bg-[#273142FF] border-gray-600"
-                  } flex items-center justify-center rounded-l-lg`}
+                      ? "bg-white border-gray-300"
+                      : "border-gray-600"
+                  } grid border  rounded-lg grid-cols-[50px_1fr_1fr_1fr] max-w-[700px] w-full`}
                 >
-                  <i
-                    class={`${
-                      theme == "light" ? "" : "text-gray-300"
-                    } text-[20px] bi bi-funnel-fill`}
-                  ></i>
-                </div>
-                {["All Books", "A-Z", "Z-A"].map((el) => (
                   <div
-                    key={el}
-                    onClick={() => {
-                      setTabs(el);
-                      setPage(1);
-                    }}
                     className={`${
                       theme == "light"
-                        ? " border-l-gray-300"
-                        : "bg-[#273142FF] border-gray-600 text-gray-300"
-                    } ${el == "Z-A" ? " rounded-r-lg" : ""} ${
-                      el == tabs ? "text-gray-600" : ""
-                    } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
+                        ? "border-l-gray-300"
+                        : "bg-[#273142FF] border-gray-600"
+                    } flex items-center justify-center rounded-l-lg`}
                   >
-                    {el}
+                    <i
+                      className={`${
+                        theme == "light" ? "" : "text-gray-300"
+                      } text-[20px] bi bi-funnel-fill`}
+                    ></i>
                   </div>
-                ))}
+                  {["All Books", "A-Z", "Z-A"].map((el) => (
+                    <div
+                      key={el}
+                      onClick={() => {
+                        setTabs(el);
+                        setPage(1);
+                      }}
+                      className={`${
+                        theme == "light"
+                          ? " border-l-gray-300"
+                          : "bg-[#273142FF] border-gray-600 text-gray-300"
+                      } ${el == "Z-A" ? " rounded-r-lg" : ""} ${
+                        el == tabs ? "text-gray-600" : ""
+                      } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
+                    >
+                      {el}
+                    </div>
+                  ))}
+                </div>
+                <div className="max-w-[300px] w-full">
+                  <div
+                    className={`${
+                      theme == "light" ? "border-[#D5D5D5]" : "border-[#CFCFCF]"
+                    } p-[15px_0_15px_30px] flex gap-5 items-center rounded-2xl w-full border`}
+                  >
+                    <i
+                      className={`${
+                        theme == "light" ? "" : "text-[#CFCFCF]"
+                      } bi bi-search`}
+                    ></i>
+                    <input
+                      onChange={(e) => setSearch(e.target.value)}
+                      type="text"
+                      className={`${
+                        theme == "light"
+                          ? ""
+                          : "placeholder:text-[#CFCFCF] text-[#CFCFCF]"
+                      } outline-none`}
+                      placeholder="search book"
+                    />
+                  </div>
+                </div>
               </div>
               <div className="">
                 <div
                   className={`${
                     theme == "light"
-                      ? "bg-[#FCFDFD] border-b-[#D5D5D5] border-none"
-                      : "bg-[#323D4EFF]"
+                      ? "bg-[#FCFDFD] border-b-[#D5D5D5] "
+                      : "bg-[#323D4EFF] border-none"
                   } p-[0_20px] rounded-t-lg border-b  grid grid-cols-[60px_1fr_1fr_1fr_130px_100px] items-center`}
                 >
                   <span
@@ -160,7 +194,12 @@ export default function Libraries() {
                   ) : pagination.length ? (
                     pagination?.map((el) => <BookItem key={el.id} book={el} />)
                   ) : (
-                    <div className="">Books not found</div>
+                    <div className="flex h-[500px] items-center justify-center gap-3">
+                      <i className="text-red-700 text-[30px]  bi bi-search"></i>
+                      <span className="text-red-500 text-[30px]">
+                        Book not found
+                      </span>
+                    </div>
                   )}
                 </ul>
                 <div className="flex items-center justify-between mt-5">

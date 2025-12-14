@@ -1,28 +1,37 @@
 import { useQuery } from "@tanstack/react-query";
 import { useThemeStore } from "../store/useThemeStore";
 import { API } from "../../API/API";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import LibraryItem from "../components/LibraryItem";
 import Sikleton from "../components/Sikleton";
 
 export default function Libraries() {
   const { theme } = useThemeStore();
   const [tabs, setTabs] = useState("Active");
+  const [page, setPage] = useState(1);
+  const [search, setSearch] = useState("");
+
+  const pageSize = 9;
 
   const { data: libraries, isLoading: librariesLoading } = useQuery({
     queryFn: async () => {
       const res = await API.get(`libraries/libraries/`);
-
       return res?.data;
     },
-
     queryKey: ["libraries"],
   });
 
-  const LibrariesSort = (() => {
+  // SORT + FILTER + SEARCH
+  const LibrariesSort = useMemo(() => {
     if (!libraries) return [];
 
-    const list = [...libraries];
+    let list = [...libraries];
+
+    if (search.trim() !== "") {
+      const term = search.trim().toLowerCase();
+      list = list.filter((el) => el.name.toLowerCase().includes(term));
+      return list;
+    }
 
     if (tabs === "Active") {
       return list.filter((el) => el.is_active === true);
@@ -45,16 +54,15 @@ export default function Libraries() {
     }
 
     return list;
-  })();
+  }, [libraries, tabs, search]);
 
-  const [page, setPage] = useState(1);
-  const pageSize = 9;
-  const totalPage = LibrariesSort?.length;
+  const totalItems = LibrariesSort.length;
+  const totalPages = Math.ceil(totalItems / pageSize);
 
-  const start = pageSize * page;
+  const start = (page - 1) * pageSize;
   const end = start + pageSize;
 
-  const pagination = LibrariesSort?.slice(start, end);
+  const pagination = LibrariesSort.slice(start, end);
 
   return (
     <div className="">
@@ -70,142 +78,160 @@ export default function Libraries() {
         <div className="">
           <div className="">
             <div className="">
-              <div
-                className={`${
-                  theme == "light"
-                    ? "bg-white border-gray-300"
-                    : "border-gray-600"
-                } grid border  rounded-lg mb-6 grid-cols-[50px_1fr_1fr_1fr_1fr_1fr] max-w-[700px] w-full`}
-              >
+              <div className="flex items-center justify-between mb-6">
                 <div
                   className={`${
                     theme == "light"
-                      ? "border-l-gray-300"
-                      : "bg-[#273142FF] border-gray-600"
-                  } flex items-center justify-center rounded-l-lg`}
+                      ? "bg-white border-gray-300"
+                      : "border-gray-600"
+                  } grid border rounded-lg grid-cols-[50px_1fr_1fr_1fr_1fr_1fr] max-w-[700px] w-full`}
                 >
-                  <i
-                    class={`${
-                      theme == "light" ? "" : "text-gray-300"
-                    } text-[20px] bi bi-funnel-fill`}
-                  ></i>
+                  <div
+                    className={`${
+                      theme == "light"
+                        ? "border-l-gray-300"
+                        : "bg-[#273142FF] border-gray-600"
+                    } flex items-center justify-center rounded-l-lg`}
+                  >
+                    <i
+                      className={`${
+                        theme == "light" ? "" : "text-gray-300"
+                      } text-[20px] bi bi-funnel-fill`}
+                    ></i>
+                  </div>
+
+                  {["Active", "Not active", "Lot books", "A-Z", "Z-A"].map(
+                    (el) => (
+                      <div
+                        key={el}
+                        onClick={() => {
+                          setTabs(el);
+                          setPage(1);
+                        }}
+                        className={`${
+                          theme == "light"
+                            ? "border-l-gray-300"
+                            : "bg-[#273142FF] border-gray-600 text-gray-300"
+                        } ${el == "Z-A" ? "rounded-r-lg" : ""} ${
+                          el == tabs ? "text-gray-600" : ""
+                        } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
+                      >
+                        {el}
+                      </div>
+                    )
+                  )}
                 </div>
-                {["Active", "Not active", "Lot books", "A-Z", "Z-A"].map(
-                  (el) => (
-                    <div
-                      key={el}
-                      onClick={() => {
-                        setTabs(el);
+
+                {/* SEARCH FIELD */}
+                <div className="max-w-[300px] w-full">
+                  <div
+                    className={`${
+                      theme == "light" ? "border-[#D5D5D5]" : "border-[#CFCFCF]"
+                    } p-[15px_0_15px_30px] flex gap-5 items-center rounded-2xl w-full border`}
+                  >
+                    <i
+                      className={`${
+                        theme == "light" ? "" : "text-[#CFCFCF]"
+                      } bi bi-search`}
+                    ></i>
+
+                    <input
+                      onChange={(e) => {
+                        setSearch(e.target.value);
                         setPage(1);
                       }}
+                      type="text"
                       className={`${
                         theme == "light"
-                          ? " border-l-gray-300"
-                          : "bg-[#273142FF] border-gray-600 text-gray-300"
-                      } ${el == "Z-A" ? " rounded-r-lg" : ""} ${
-                        el == tabs ? "text-gray-600" : ""
-                      } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
-                    >
-                      {el}
-                    </div>
-                  )
-                )}
+                          ? ""
+                          : "placeholder:text-[#CFCFCF] text-[#CFCFCF]"
+                      } outline-none`}
+                      placeholder="search library"
+                    />
+                  </div>
+                </div>
               </div>
+
               <div className="">
                 <div
                   className={`${
                     theme == "light"
-                      ? "bg-[#FCFDFD] border-b-[#D5D5D5] border-none"
-                      : "bg-[#323D4EFF]"
-                  } p-[0_20px] rounded-t-lg border-b  grid grid-cols-[60px_1fr_3fr_150px_120px] items-center`}
+                      ? "bg-[#FCFDFD] border-b-[#D5D5D5] "
+                      : "bg-[#323D4EFF] border-none"
+                  } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_3fr_150px_120px] items-center`}
                 >
-                  <span
-                    className={`${
-                      theme == "light" ? "" : "text-gray-300"
-                    } px-4 py-3 text-[14px] font-bold`}
-                  >
-                    Like
-                  </span>
-                  <span
-                    className={`${
-                      theme == "light" ? "" : "text-gray-300"
-                    } px-4 py-3 text-[14px] font-bold`}
-                  >
-                    NAME
-                  </span>
-                  <span
-                    className={`${
-                      theme == "light" ? "" : "text-gray-300"
-                    } px-4 py-3 text-[14px] font-bold`}
-                  >
-                    ADDRESS
-                  </span>
-                  <span
-                    className={`${
-                      theme == "light" ? "" : "text-gray-300"
-                    } px-4 py-3 text-[14px] font-bold`}
-                  >
-                    TOTAl
-                  </span>
-                  <span
-                    className={`${
-                      theme == "light" ? "" : "text-gray-300"
-                    } px-4 py-3 text-[14px] font-bold`}
-                  >
-                    STATUS
-                  </span>
+                  {["Like", "NAME", "ADDRESS", "TOTAL", "STATUS"].map((el) => (
+                    <span
+                      key={el}
+                      className={`${
+                        theme == "light" ? "" : "text-gray-300"
+                      } px-4 py-3 text-[14px] font-bold`}
+                    >
+                      {el}
+                    </span>
+                  ))}
                 </div>
+
                 <ul className="">
                   {librariesLoading ? (
-                    Array.from({ length: 10 }).map((el, index) => (
+                    Array.from({ length: 10 }).map((_, index) => (
                       <Sikleton key={index} />
                     ))
-                  ) : pagination.length ? (
-                    pagination?.map((el) => (
+                  ) : LibrariesSort.length ? (
+                    pagination.map((el) => (
                       <LibraryItem key={el.id} library={el} />
                     ))
                   ) : (
-                    <div className="">Libraies not found</div>
+                    <div className="flex h-[500px] items-center justify-center gap-3">
+                      <i className="text-red-700 text-[30px]  bi bi-search"></i>
+                      <span className="text-red-500 text-[30px]">
+                        Liblary not found
+                      </span>
+                    </div>
                   )}
                 </ul>
+
+                {/* PAGINATION */}
                 <div className="flex items-center justify-between mt-5">
                   <span
                     className={`${
                       theme == "light" ? "text-[#202224]" : "text-[#979797]"
-                    } text-[14px] font-semibold `}
+                    } text-[14px] font-semibold`}
                   >
-                    Showing {page}-{page * pageSize} of {""}
-                    {Math.ceil(totalPage / pageSize) - 1}
+                    Showing {start + 1}-{Math.min(end, totalItems)} of{" "}
+                    {totalItems}
                   </span>
+
                   <div
                     className={`${
                       theme == "light"
                         ? "border-gray-300"
                         : "bg-[#323D4EFF] border-gray-500"
-                    } flex justify-end max-w-[90px] w-full items-center border  rounded-lg box-border`}
+                    } flex justify-end max-w-[90px] w-full items-center border rounded-lg`}
                   >
                     <button
-                      disabled={page == 1}
+                      disabled={page === 1}
                       onClick={() => setPage((p) => p - 1)}
                       className={`${
                         theme == "light" ? "border-gray-300" : "border-gray-500"
-                      } w-[45px] h-10 border-r disabled:opacity-50 cursor-pointer flex items-center justify-center`}
+                      } w-[45px] h-10 border-r disabled:opacity-50 flex items-center justify-center`}
                     >
                       <i
                         className={`${
                           theme == "light" ? "text-[#202224]" : "text-white"
-                        } text-[18px] font-blod bi bi-arrow-left`}
+                        } text-[18px] bi bi-arrow-left`}
                       ></i>
                     </button>
+
                     <button
-                      disabled={page == Math.ceil(totalPage / pageSize) - 1}
+                      disabled={page === totalPages}
                       onClick={() => setPage((p) => p + 1)}
-                      className="w-[45px] h-10 cursor-pointer disabled:opacity-50  flex items-center justify-center"
+                      className="w-[45px] h-10 disabled:opacity-50 flex items-center justify-center"
                     >
                       <i
                         className={`${
                           theme == "light" ? "text-[#202224]" : "text-white"
-                        } text-[18px] font-blod bi bi-arrow-right`}
+                        } text-[18px] bi bi-arrow-right`}
                       ></i>
                     </button>
                   </div>

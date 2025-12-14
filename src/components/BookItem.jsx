@@ -60,7 +60,7 @@ export default function BookItem({ book }) {
           theme == "light" ? "" : "text-gray-300"
         } text-[14px] cursor-pointer font-bold p-5 flex justify-center`}
       >
-        <i class={` text-[20px] bi bi-three-dots`}></i>
+        <i className={` text-[20px] bi bi-three-dots`}></i>
       </button>
     </li>
   );

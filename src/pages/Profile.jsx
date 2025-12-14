@@ -45,7 +45,7 @@ export default function Profile() {
           <div className="flex items-center justify-between mb-10 border-b border-b-[#979797]">
             <div className="">
               <i
-                class={`${
+                className={`${
                   theme == "light" ? "text-[#979797]" : "text-gray-300"
                 } text-[100px] bi bi-person-circle`}
               ></i>
@@ -53,13 +53,15 @@ export default function Profile() {
             <div className="flex items-center gap-2">
               <button className="p-[8px_20px] flex items-center gap-3 cursor-pointer bg-yellow-700 rounded-lg ">
                 <span className="text-[16px]">
-                  <i class={`text-white text-[16px] bi bi-pencil-square`}></i>
+                  <i
+                    className={`text-white text-[16px] bi bi-pencil-square`}
+                  ></i>
                 </span>
                 <span className="text-white text-[16px]">Edit Profile</span>
               </button>
               <button className="p-[8px_20px] flex items-center gap-3 cursor-pointer bg-red-700 rounded-lg">
                 <span className="text-[16px]">
-                  <i class="text-white text-[16px] bi bi-box-arrow-right"></i>
+                  <i className="text-white text-[16px] bi bi-box-arrow-right"></i>
                 </span>
                 <span className="text-white text-[16px]"> Log out</span>
               </button>
@@ -68,24 +70,36 @@ export default function Profile() {
           <div className="">
             <div className="flex items-center gap-3 mb-3">
               <div className="w-[55px] h-[55px] bg-[#CCF0EBFF] rounded-[50%] flex items-center justify-center">
-                <i class="text-[24px] bi bi-person text-[#00B69BFF]"></i>
+                <i className="text-[24px] bi bi-person text-[#00B69BFF]"></i>
               </div>
               <div className="flex flex-col">
                 <span className="text-[14px] text-[#979797] font-semibold mb-1">
                   Name
                 </span>
-                <span className="text-[18px] font-bold">{user?.name}</span>
+                <span
+                  className={`${
+                    theme == "light" ? "" : "text-gray-300"
+                  } text-[18px] font-bold`}
+                >
+                  {user?.name}
+                </span>
               </div>
             </div>
             <div className="flex items-center gap-3">
               <div className="w-[55px] h-[55px] bg-[#CCF0EBFF] rounded-[50%] flex items-center justify-center">
-                <i class="text-[24px] bi bi-telephone text-[#00B69BFF]"></i>
+                <i className="text-[24px] bi bi-telephone text-[#00B69BFF]"></i>
               </div>
               <div className="flex flex-col">
                 <span className="text-[14px] text-[#979797] font-semibold mb-1">
                   Phone
                 </span>
-                <span className="text-[18px] font-bold">{user?.phone}</span>
+                <span
+                  className={`${
+                    theme == "light" ? "" : "text-gray-300"
+                  } text-[18px] font-bold`}
+                >
+                  {user?.phone}
+                </span>
               </div>
             </div>
           </div>

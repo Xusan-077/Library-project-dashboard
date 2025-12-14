@@ -1,7 +1,8 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const API = axios.create({
-  baseURL: "https://org-ave-jimmy-learners.trycloudflare.com/api/v1",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 API.interceptors.request.use((config) => {
@@ -20,10 +21,13 @@ API.interceptors.response.use(
   },
 
   (err) => {
-    if (err.response?.status === 401) {
+    if (err.response?.status === 401 || err.response?.status === 403) {
       localStorage.clear();
 
       window.location.href = "/login";
+    }
+    if (err.response?.status === 404) {
+      toast.warning("Data not found 404 error");
     }
     return Promise.reject(err);
   }
