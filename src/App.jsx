@@ -9,8 +9,11 @@ import LibraryDetailPage from "./pages/LibraryDetailPage";
 import BookDetailPage from "./pages/BookDetailPage";
 import { ToastContainer } from "react-toastify";
 import Favorites from "./pages/Favorites";
+import { useThemeStore } from "./store/useThemeStore";
 
 export default function App() {
+  const { theme } = useThemeStore();
+
   return (
     <>
       <Routes>
@@ -36,7 +39,7 @@ export default function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="colored"
+        theme={theme}
       />
     </>
   );

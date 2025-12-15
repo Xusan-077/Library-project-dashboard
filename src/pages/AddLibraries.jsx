@@ -149,6 +149,7 @@ export default function AddLibraries() {
                       type="text"
                       {...register("user.name")}
                       placeholder="Enter your name"
+                      autoComplete="username"
                       className={`${
                         theme === "light"
                           ? "bg-gray-100 border-gray-300"
@@ -203,6 +204,7 @@ export default function AddLibraries() {
                       type="password"
                       {...register("user.password")}
                       placeholder="******"
+                      autoComplete="current-password"
                       className={`${
                         theme === "light"
                           ? "bg-gray-100 border-gray-300"
@@ -340,6 +342,7 @@ export default function AddLibraries() {
                       </span>
 
                       <select
+                        value={`yes`}
                         className={`${
                           theme === "light"
                             ? "bg-gray-100 border-gray-300"
@@ -347,9 +350,7 @@ export default function AddLibraries() {
                         } border p-[0_20px] mt-1 h-15 rounded-lg outline-none w-full`}
                         {...register("library.can_rent_books")}
                       >
-                        <option selected value="yes">
-                          Yes
-                        </option>
+                        <option value="yes">Yes</option>
                         <option value="no">No</option>
                       </select>
 

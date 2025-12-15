@@ -1,19 +1,17 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+
 import { useMutation } from "@tanstack/react-query";
 import { API } from "../../API/API";
 import { toast } from "react-toastify";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore";
 
 export default function Login() {
   const navigate = useNavigate();
 
-  const { login, user } = useAuthStore();
-
-  console.log("user", user);
+  const { login } = useAuthStore();
 
   const schema = yup
     .object({

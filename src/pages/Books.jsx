@@ -5,10 +5,12 @@ import { useState } from "react";
 import BookItem from "../components/BookItem";
 import Sikleton from "../components/Sikleton";
 
-export default function Libraries() {
+export default function Books() {
   const { theme } = useThemeStore();
   const [tabs, setTabs] = useState("All Books");
   const [search, setSearch] = useState("");
+
+  const [deleteItemId, setDeleteItemId] = useState(null);
 
   const { data: books, isLoading: librariesLoading } = useQuery({
     queryFn: async () => {
@@ -191,7 +193,14 @@ export default function Libraries() {
                     <Sikleton key={index} />
                   ))
                 ) : pagination.length ? (
-                  pagination?.map((el) => <BookItem key={el.id} book={el} />)
+                  pagination?.map((el) => (
+                    <BookItem
+                      setDeleteItemId={setDeleteItemId}
+                      deleteItemId={deleteItemId}
+                      key={el.id}
+                      book={el}
+                    />
+                  ))
                 ) : (
                   <div className="flex h-[500px] items-center justify-center gap-3">
                     <i className="text-red-700 text-[30px]  bi bi-search"></i>

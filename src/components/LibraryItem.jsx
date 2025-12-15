@@ -5,7 +5,6 @@ import { API } from "../../API/API";
 import { toast } from "react-toastify";
 import { queryClient } from "../main";
 import { useFavoriteStore } from "../store/useFavoriteStore";
-import { useEffect } from "react";
 
 export default function LibraryItem({
   library,
@@ -19,8 +18,8 @@ export default function LibraryItem({
   const navigate = useNavigate();
 
   const { mutate: activateLibrary } = useMutation({
-    mutationFn: async (activateId) => {
-      const res = await API.patch(`/libraries/library/activate/${activateId}/`);
+    mutationFn: async (Id) => {
+      const res = await API.patch(`/libraries/library/activate/${Id}/`);
 
       return res?.data;
     },
@@ -29,7 +28,7 @@ export default function LibraryItem({
       setActiveItemId(null);
       queryClient.invalidateQueries();
     },
-    onError: (err) => {
+    onError: () => {
       toast.error("Failed to activate library");
     },
   });
@@ -137,18 +136,16 @@ export default function LibraryItem({
         <div
           onClick={(e) => {
             e.stopPropagation();
+
+            Boolean(library?.is_active)
+              ? deactivateLibrary(library?.id)
+              : activateLibrary(library?.id);
           }}
           className={`${
             theme == "light" ? "bg-white " : "bg-gray-700"
           } absolute -bottom-5 z-10 -right-2 p-3 transition-all duration-300 shadow-lg rounded`}
         >
-          <button
-            onClick={() => {
-              Boolean(library?.is_active)
-                ? deactivateLibrary(library?.id)
-                : activateLibrary(library?.id);
-            }}
-          >
+          <button>
             <span
               className={`${
                 theme == "light" ? "text-gray-600" : "text-white"

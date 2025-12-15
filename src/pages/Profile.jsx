@@ -1,14 +1,21 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useAuthStore } from "../store/useAuthStore";
 import { useThemeStore } from "../store/useThemeStore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { API } from "../../API/API";
+import { queryClient } from "../main";
+
 export default function Profile() {
   const { theme } = useThemeStore();
   const { user, setIsAuth, setUser, logout } = useAuthStore();
   const [logOut, setLogOut] = useState(false);
+  const [editModal, setEditModal] = useState(false);
 
   const { data: userAction } = useQuery({
     queryFn: async () => {
@@ -17,6 +24,23 @@ export default function Profile() {
       return res?.data;
     },
     queryKey: ["user Data"],
+  });
+
+  const { mutate: editProfile } = useMutation({
+    mutationFn: async (body) => {
+      const res = await API.patch(`/auth/admin/profile/`, body);
+
+      return res?.data;
+    },
+
+    onSuccess: () => {
+      toast.success("Success edit profile");
+      setEditModal(false);
+      queryClient.invalidateQueries();
+    },
+    onError: () => {
+      toast.error("Failed to edit profile");
+    },
   });
 
   const navigate = useNavigate();
@@ -30,6 +54,29 @@ export default function Profile() {
       setIsAuth(true);
     }
   }, [access, refresh]);
+
+  const schema = yup
+    .object({
+      name: yup.string().required(),
+      phone: yup.string().required(),
+    })
+    .required();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      name: userAction?.name,
+      phone: userAction?.phone,
+    },
+    resolver: yupResolver(schema),
+  });
+
+  function handleEdit(data) {
+    editProfile(data);
+  }
 
   return (
     <div className="">
@@ -72,6 +119,63 @@ export default function Profile() {
         </div>
       )}
 
+      {editModal && (
+        <div className="fixed top-0 left-0 bg-[#0007] w-full flex items-center justify-center h-screen z-200">
+          <div className={`bg-white max-w-[400px] w-full p-[25px] rounded-lg`}>
+            <div className="flex justify-between items-center border-b border-b-[#e5e7eb] mb-2">
+              <span className={`text-[18px]`}>Edit profile</span>
+              <span
+                onClick={() => setEditModal(false)}
+                className={`cursor-pointer text-[25px]`}
+              >
+                &times;
+              </span>
+            </div>
+            <div className="">
+              <form
+                onSubmit={handleSubmit(handleEdit)}
+                className="flex flex-col"
+              >
+                <label className="mb-3 flex flex-col">
+                  <span className="text-[18px] font-semibold text-[#202224] mb-[15px]">
+                    Name:
+                  </span>
+                  <input
+                    type="text"
+                    className="h-15 p-[0_15px] border-[#D8D8D8] outline-none  border rounded-lg bg-[#F1F4F9]"
+                    name="name"
+                    {...register("name")}
+                    defaultValue={userAction?.name}
+                    placeholder="Enter name"
+                  />
+                  <span className="">{errors?.name?.message}</span>
+                </label>
+                <label className="mb-3 flex flex-col">
+                  <span className="text-[18px] font-semibold text-[#202224] mb-[15px]">
+                    Phone:
+                  </span>
+                  <input
+                    type="phone"
+                    className="h-15 p-[0_15px] border-[#D8D8D8]  outline-none border rounded-lg bg-[#F1F4F9]"
+                    name="text"
+                    {...register("phone")}
+                    defaultValue={userAction?.phone}
+                    placeholder="Enter phone"
+                  />
+                  <span className="">{errors?.phone?.message}</span>
+                </label>
+                <button
+                  className="w-full bg-[#4880FF] p-[15px_0] text-[16px] font-bold text-white rounded-lg"
+                  type="submit"
+                >
+                  Edit profile
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="">
         <h2
           className={`${
@@ -95,7 +199,10 @@ export default function Profile() {
               ></i>
             </div>
             <div className="flex items-center gap-2">
-              <button className="p-[8px_20px] flex items-center gap-3 cursor-pointer bg-yellow-700 rounded-lg ">
+              <button
+                onClick={() => setEditModal(true)}
+                className="p-[8px_20px] flex items-center gap-3 cursor-pointer bg-yellow-700 rounded-lg "
+              >
                 <span className="text-[16px]">
                   <i
                     className={`text-white text-[16px] bi bi-pencil-square`}
@@ -128,7 +235,7 @@ export default function Profile() {
                     theme == "light" ? "" : "text-gray-300"
                   } text-[18px] font-bold`}
                 >
-                  {user?.name}
+                  {userAction?.name}
                 </span>
               </div>
             </div>
@@ -145,7 +252,7 @@ export default function Profile() {
                     theme == "light" ? "" : "text-gray-300"
                   } text-[18px] font-bold`}
                 >
-                  {user?.phone}
+                  {userAction?.phone}
                 </span>
               </div>
             </div>
