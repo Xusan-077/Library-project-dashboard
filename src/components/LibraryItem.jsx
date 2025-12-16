@@ -49,6 +49,19 @@ export default function LibraryItem({
     },
   });
 
+  function handleActivate() {
+    activateLibrary(library?.id);
+
+    console.log("id", library?.id);
+    console.log("library", library);
+  }
+  function handleDeactivate() {
+    deactivateLibrary(library?.id);
+
+    console.log("id", library?.id);
+    console.log("library", library);
+  }
+
   return (
     <li
       onClick={() => {
@@ -137,9 +150,7 @@ export default function LibraryItem({
           onClick={(e) => {
             e.stopPropagation();
 
-            Boolean(library?.is_active)
-              ? deactivateLibrary(library?.id)
-              : activateLibrary(library?.id);
+            Boolean(library?.is_active) ? handleDeactivate() : handleActivate();
           }}
           className={`${
             theme == "light" ? "bg-white " : "bg-gray-700"

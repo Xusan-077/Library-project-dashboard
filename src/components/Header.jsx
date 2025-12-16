@@ -37,6 +37,10 @@ export default function Header() {
     }
   }, [access, refresh]);
 
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+  }, [lang]);
+
   return (
     <div className="flex items-center justify-between p-5">
       <button>
@@ -88,7 +92,7 @@ export default function Header() {
                 <span
                   className={`${
                     theme == "light" ? "" : "text-[#F2F2F2]"
-                  } text-[14px]`}
+                  } text-[14px] w-10`}
                 >
                   {lang == "uz"
                     ? "Uzbek"
