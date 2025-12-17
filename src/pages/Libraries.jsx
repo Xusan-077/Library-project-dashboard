@@ -4,10 +4,13 @@ import { API } from "../../API/API";
 import { useState, useMemo, useEffect } from "react";
 import LibraryItem from "../components/LibraryItem";
 import Sikleton from "../components/Sikleton";
+import { useTranslation } from "react-i18next";
 
 export default function Libraries() {
   const { theme } = useThemeStore();
-  const [tabs, setTabs] = useState("Active");
+  const { t } = useTranslation();
+
+  const [tabs, setTabs] = useState(t("common.active"));
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
 
@@ -27,6 +30,10 @@ export default function Libraries() {
     queryKey: ["libraries"],
   });
 
+  useEffect(() => {
+    setTabs(t("common.active"));
+  }, [t("common.active")]);
+
   const LibrariesSort = useMemo(() => {
     if (!libraries) return [];
 
@@ -38,15 +45,15 @@ export default function Libraries() {
       return list;
     }
 
-    if (tabs === "Active") {
+    if (tabs === t("common.active")) {
       return list.filter((el) => el.is_active === true);
     }
 
-    if (tabs === "Not active") {
+    if (tabs === t("common.notActive")) {
       return list.filter((el) => el.is_active !== true);
     }
 
-    if (tabs === "Lot books") {
+    if (tabs === t("common.lotNook")) {
       return list.sort((a, b) => b.total_books - a.total_books);
     }
 
@@ -77,7 +84,7 @@ export default function Libraries() {
             theme == "light" ? "text-black" : "text-white"
           } text-[32px] font-bold mb-[27px]`}
         >
-          Libraries
+          {t("libraries.title")}
         </h2>
 
         <div className="">
@@ -105,26 +112,30 @@ export default function Libraries() {
                     ></i>
                   </div>
 
-                  {["Active", "Not active", "Lot books", "A-Z", "Z-A"].map(
-                    (el) => (
-                      <div
-                        key={el}
-                        onClick={() => {
-                          setTabs(el);
-                          setPage(1);
-                        }}
-                        className={`${
-                          theme == "light"
-                            ? "border-l-gray-300"
-                            : "bg-[#273142FF] border-gray-600 text-gray-300"
-                        } ${el == "Z-A" ? "rounded-r-lg" : ""} ${
-                          el == tabs ? "text-gray-600" : ""
-                        } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
-                      >
-                        {el}
-                      </div>
-                    )
-                  )}
+                  {[
+                    t("common.active"),
+                    t("common.notActive"),
+                    t("common.lotNook"),
+                    "A-Z",
+                    "Z-A",
+                  ].map((el) => (
+                    <div
+                      key={el}
+                      onClick={() => {
+                        setTabs(el);
+                        setPage(1);
+                      }}
+                      className={`${
+                        theme == "light"
+                          ? "border-l-gray-300"
+                          : "bg-[#273142FF] border-gray-600 text-gray-300"
+                      } ${el == "Z-A" ? "rounded-r-lg" : ""} ${
+                        el == tabs ? "text-gray-600" : ""
+                      } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
+                    >
+                      {el}
+                    </div>
+                  ))}
                 </div>
 
                 {/* SEARCH FIELD */}
@@ -151,7 +162,7 @@ export default function Libraries() {
                           ? ""
                           : "placeholder:text-[#CFCFCF] text-[#CFCFCF]"
                       } outline-none`}
-                      placeholder="search library"
+                      placeholder={t("libraries.search")}
                     />
                   </div>
                 </div>
@@ -166,12 +177,12 @@ export default function Libraries() {
                   } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_3fr_150px_120px_100px] items-center`}
                 >
                   {[
-                    "Like",
-                    "NAME",
-                    "ADDRESS",
-                    "TOTAL",
-                    "STATUS",
-                    "ACTIONS",
+                    t("common.like"),
+                    t("common.name"),
+                    t("common.address"),
+                    t("common.total"),
+                    t("common.status"),
+                    t("common.actions"),
                   ].map((el) => (
                     <span
                       key={el}
@@ -188,7 +199,7 @@ export default function Libraries() {
                   <div className="flex h-[500px] items-center justify-center gap-3">
                     <i className="text-red-700 text-[30px]  bi bi-search"></i>
                     <span className="text-red-500 text-[30px]">
-                      Libraries not found
+                      {t("libraries.notFound")}
                     </span>
                   </div>
                 ) : (
@@ -211,7 +222,7 @@ export default function Libraries() {
                         <div className="flex h-[500px] items-center justify-center gap-3">
                           <i className="text-red-700 text-[30px]  bi bi-search"></i>
                           <span className="text-red-500 text-[30px]">
-                            Liblary not found
+                            {t("libraries.notFound")}
                           </span>
                         </div>
                       )}
@@ -222,7 +233,8 @@ export default function Libraries() {
                           theme == "light" ? "text-[#202224]" : "text-[#979797]"
                         } text-[14px] font-semibold`}
                       >
-                        Showing {start + 1}-{Math.min(end, totalItems)} of{" "}
+                        {t("common.showing")} {start + 1}-
+                        {Math.min(end, totalItems)} {t("common.of")}{" "}
                         {totalItems}
                       </span>
 

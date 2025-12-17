@@ -1,3 +1,65 @@
 {
-    
+  "header": {
+    "user": "Пользователь",
+    "admin": "Администратор",
+    "language": "Выбор языка"
+  },
+
+  "leftComponent": {
+    "books": "Книги",
+    "libraries": "Библиотеки",
+    "favorites": "Избранное",
+    "AddToLibrary": "Добавить",
+    "profile": "Профиль"
+  },
+
+  "books": {
+    "title": "Книги",
+    "filterAll": "Все",
+    "search": "Поиск книги",
+    "notFound": "Книги не найдены",
+    "deleteBook": "Удалить"
+  },
+
+  "libraries": {
+    "title": "Библиотеки",
+    "search": "Поиск",
+    "notFound": "Не найдено"
+  },
+
+  "favorites": {
+    "title": "Избранное",
+    "MyFavBooks": "Мои книги",
+    "MyFavLibrary": "Мои библиотеки"
+  },
+
+  "addLibrary": {
+    "title": "Добавить"
+  },
+
+  "profile": {
+    "title": "Профиль",
+    "name": "Имя",
+    "phone": "Телефон",
+    "edit": "Редактировать",
+    "logout": "Выйти"
+  },
+
+  "common": {
+    "like": "Нравится",
+    "name": "Название",
+    "address": "Адрес",
+    "total": "Всего",
+    "status": "Статус",
+    "actions": "Действия",
+    "author": "Автор",
+    "publisher": "Издатель",
+    "showing": "Показано",
+    "of": "из",
+    "active": "Активен",
+    "notActive": "Неактивен",
+    "lotNook": "Много книг",
+    "Deactivate": "Деактивировать",
+    "Activation": "Активировать"
+  }
 }

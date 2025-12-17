@@ -1,13 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { useThemeStore } from "../store/useThemeStore";
 import { API } from "../../API/API";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BookItem from "../components/BookItem";
 import Sikleton from "../components/Sikleton";
+import { useTranslation } from "react-i18next";
 
 export default function Books() {
+  const { t } = useTranslation();
+
   const { theme } = useThemeStore();
-  const [tabs, setTabs] = useState("All Books");
+  const [tabs, setTabs] = useState(t("books.filterAll"));
   const [search, setSearch] = useState("");
 
   const [deleteItemId, setDeleteItemId] = useState(null);
@@ -26,6 +29,10 @@ export default function Books() {
     queryKey: ["books"],
   });
 
+  useEffect(() => {
+    setTabs(t("books.filterAll"));
+  }, [t("books.filterAll")]);
+
   const BookssSort = (() => {
     if (!books) return [];
 
@@ -39,7 +46,7 @@ export default function Books() {
       return filtered;
     }
 
-    if (tabs === "All Books") {
+    if (tabs === t("books.filterAll")) {
       return list;
     }
 
@@ -71,7 +78,7 @@ export default function Books() {
             theme == "light" ? "text-black" : "text-white"
           } text-[32px] font-bold mb-[27px]`}
         >
-          Books
+          {t("books.title")}
         </h2>
 
         <div className="">
@@ -97,7 +104,7 @@ export default function Books() {
                     } text-[20px] bi bi-funnel-fill`}
                   ></i>
                 </div>
-                {["All Books", "A-Z", "Z-A"].map((el) => (
+                {[t("books.filterAll"), "A-Z", "Z-A"].map((el) => (
                   <div
                     key={el}
                     onClick={() => {
@@ -135,7 +142,7 @@ export default function Books() {
                         ? ""
                         : "placeholder:text-[#CFCFCF] text-[#CFCFCF]"
                     } outline-none`}
-                    placeholder="search book"
+                    placeholder={t("books.search")}
                   />
                 </div>
               </div>
@@ -153,42 +160,42 @@ export default function Books() {
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  Like
+                  {t("common.like")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  NAME
+                  {t("common.name")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  ADDRESS
+                  {t("common.author")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  TOTAl
+                  {t("common.publisher")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  STATUS
+                  {t("common.total")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-center text-[14px] font-bold`}
                 >
-                  ACTIONS
+                  {t("common.actions")}
                 </span>
               </div>
 
@@ -196,7 +203,7 @@ export default function Books() {
                 <div className="flex h-[500px] items-center justify-center gap-3">
                   <i className="text-red-700 text-[30px]  bi bi-search"></i>
                   <span className="text-red-500 text-[30px]">
-                    Books not found
+                    {t("books.notFound")}
                   </span>
                 </div>
               ) : (
@@ -230,7 +237,8 @@ export default function Books() {
                         theme == "light" ? "text-[#202224]" : "text-[#979797]"
                       } text-[14px] font-semibold `}
                     >
-                      Showing {page}-{page * pageSize} of {""}
+                      {t("common.showing")} {page}-{page * pageSize}{" "}
+                      {t("common.of")} {""}
                       {Math.ceil(totalPage / pageSize) - 1}
                     </span>
                     <div

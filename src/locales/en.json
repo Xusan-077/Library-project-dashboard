@@ -1,3 +1,64 @@
 {
-    
+  "header": {
+    "user": "User",
+    "admin": "Admin",
+    "language": "Select Language"
+  },
+
+  "leftComponent": {
+    "books": "Books",
+    "libraries": "Libraries",
+    "favorites": "Favorites",
+    "AddToLibrary": "Add Library",
+    "profile": "Profile"
+  },
+
+  "books": {
+    "title": "Books",
+    "filterAll": "All Books",
+    "search": "search book",
+    "notFound": "Books not found",
+    "deleteBook": "Delete book"
+  },
+  "libraries": {
+    "title": "Libraies",
+    "search": "search library",
+    "notFound": "Liblary not found"
+  },
+
+  "favorites": {
+    "title": "Favorites",
+    "MyFavBooks": "My favorite books",
+    "MyFavLibrary": "My favorite Library"
+  },
+
+  "addLibrary": {
+    "title": "Add library"
+  },
+
+  "profile": {
+    "title": "Profile",
+    "name": "Name",
+    "phone": "Phone",
+    "edit": "Edit profile",
+    "logout": "Log out"
+  },
+
+  "common": {
+    "like": "Like",
+    "name": "Name",
+    "address": "Address",
+    "total": "Total",
+    "status": "Status",
+    "actions": "Actionss",
+    "author": "Author",
+    "publisher": "Publisher",
+    "showing": "Showing",
+    "of": "of",
+    "active": "Active",
+    "notActive": "Not Active",
+    "lotNook": "Lot books",
+    "Deactivate": "Deactivate",
+    "Activation": "Activation"
+  }
 }

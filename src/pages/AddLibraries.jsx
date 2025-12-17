@@ -17,9 +17,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../API/API";
 import { useThemeStore } from "../store/useThemeStore";
+import { useTranslation } from "react-i18next";
 
 export default function AddLibraries() {
   const { theme } = useThemeStore();
+  const { t } = useTranslation();
 
   const [coords, setCoords] = useState(null);
   const [adress, setAdress] = useState("");
@@ -121,7 +123,7 @@ export default function AddLibraries() {
             theme == "light" ? "text-black" : "text-white"
           } text-[32px] font-bold mb-[27px]`}
         >
-          Add library
+          {t("addLibrary.title")}
         </h2>
 
         <div className="w-full flex justify-center">

@@ -8,14 +8,18 @@ import ru from "../assets/icons/rus.png";
 import { useThemeStore } from "../store/useThemeStore";
 import { useAuthStore } from "../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import i18n from "../i18next";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   const [lang, setLang] = useState("en");
   const [langModal, setLangModal] = useState(false);
 
-  const { setUser, setIsAuth, user } = useAuthStore();
+  const { setUser, setIsAuth } = useAuthStore();
   const { theme, setTheme } = useThemeStore();
 
   const { data: userAction } = useQuery({
@@ -37,9 +41,18 @@ export default function Header() {
     }
   }, [access, refresh]);
 
+  const changeLang = (lng) => {
+    i18n.changeLanguage(lng);
+    setLang(lng);
+    localStorage.setItem("lang", lng);
+    setLangModal(false);
+  };
+
   useEffect(() => {
-    localStorage.setItem("lang", lang);
-  }, [lang]);
+    const lng = localStorage.getItem("lang");
+
+    setLang(lng);
+  }, []);
 
   return (
     <div className="flex items-center justify-between p-5">
@@ -124,12 +137,12 @@ export default function Header() {
                     theme == "light" ? "" : "text-gray-200"
                   } block border-b -mx-4 px-4 border-b-[#979797] mb-3 pb-3`}
                 >
-                  Select Language
+                  {t("header.language")}
                 </span>
               </div>
               <div
                 onClick={() => {
-                  setLang("en");
+                  changeLang("en");
                   setLangModal(false);
                 }}
                 className="flex p-[15px_0] cursor-pointer items-center justify-between"
@@ -158,7 +171,7 @@ export default function Header() {
               </div>
               <div
                 onClick={() => {
-                  setLang("uz");
+                  changeLang("uz");
                   setLangModal(false);
                 }}
                 className="flex p-[15px_0] cursor-pointer items-center justify-between"
@@ -187,7 +200,7 @@ export default function Header() {
               </div>
               <div
                 onClick={() => {
-                  setLang("ru");
+                  changeLang("ru");
                   setLangModal(false);
                 }}
                 className="flex p-[15px_0] cursor-pointer items-center justify-between"
@@ -231,14 +244,14 @@ export default function Header() {
                   theme == "light" ? "text-black" : "text-gray-200"
                 } text-[14px] font-bold`}
               >
-                {user?.name || "User"}
+                {userAction?.name || t("header.user")}
               </h2>
               <h3
                 className={`${
                   theme == "light" ? "text-black" : "text-gray-300"
                 } text-[14px] font-semibold`}
               >
-                Admin
+                {t("header.admin")}
               </h3>
             </div>
           </div>

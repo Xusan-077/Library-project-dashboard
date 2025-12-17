@@ -1,3 +1,65 @@
 {
-    
+  "header": {
+    "user": "Foydalanuvchi",
+    "admin": "Administrator",
+    "language": "Tilni tanlash"
+  },
+
+  "leftComponent": {
+    "books": "Kitoblar",
+    "libraries": "Kutubxonalar",
+    "favorites": "Sevimlilar",
+    "AddToLibrary": "Qo‘shish",
+    "profile": "Profil"
+  },
+
+  "books": {
+    "title": "Kitoblar",
+    "filterAll": "Barchasi",
+    "search": "Kitob qidirish",
+    "notFound": "Topilmadi",
+    "deleteBook": "O‘chirish"
+  },
+
+  "libraries": {
+    "title": "Kutubxonalar",
+    "search": "Qidirish",
+    "notFound": "Topilmadi"
+  },
+
+  "favorites": {
+    "title": "Sevimlilar",
+    "MyFavBooks": "Kitoblarim",
+    "MyFavLibrary": "Kutubxonalarim"
+  },
+
+  "addLibrary": {
+    "title": "Qo‘shish"
+  },
+
+  "profile": {
+    "title": "Profil",
+    "name": "Ism",
+    "phone": "Telefon",
+    "edit": "Tahrirlash",
+    "logout": "Chiqish"
+  },
+
+  "common": {
+    "like": "Yoqdi",
+    "name": "Nomi",
+    "address": "Manzil",
+    "total": "Jami",
+    "status": "Holat",
+    "actions": "Amallar",
+    "author": "Muallif",
+    "publisher": "Nashriyot",
+    "showing": "Ko‘rsatilmoqda",
+    "of": "dan",
+    "active": "Faol",
+    "notActive": "Faol emas",
+    "lotNook": "Ko‘p kitob",
+    "Deactivate": "O‘chirish",
+    "Activation": "Faollashtirish"
+  }
 }

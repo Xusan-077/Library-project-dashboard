@@ -5,14 +5,17 @@ import { API } from "../../API/API";
 import { toast } from "react-toastify";
 import { queryClient } from "../main";
 import { useFavoriteStore } from "../store/useFavoriteStore";
+import { useTranslation } from "react-i18next";
 
 export default function LibraryItem({
   library,
   activeItemId,
   setActiveItemId,
+  fav,
 }) {
   const isOpen = activeItemId === library.id;
 
+  const { t } = useTranslation();
   const { theme } = useThemeStore();
   const { FavoriteLibrarys, toggleLibraryToFavorite } = useFavoriteStore();
   const navigate = useNavigate();
@@ -72,7 +75,11 @@ export default function LibraryItem({
         theme == "light"
           ? "bg-white border-[#D5D5D5]"
           : "bg-[#252E3EFF] border-b-[#323D4EFF]"
-      } border-b relative p-[0_20px] cursor-pointer grid grid-cols-[60px_1fr_3fr_150px_120px_100px] items-center`}
+      } ${
+        !fav
+          ? "grid-cols-[60px_1fr_3fr_150px_120px_100px]"
+          : "grid-cols-[60px_1fr_3fr_150px_120px]"
+      } border-b relative p-[0_20px] cursor-pointer grid  items-center`}
     >
       <button
         onClick={(e) => {
@@ -128,43 +135,56 @@ export default function LibraryItem({
               } `
         } px-4 py-[5px] text-center  rounded-lg`}
       >
-        {library?.is_active ? "active" : "not active"}
+        {Boolean(library?.is_active)
+          ? t("common.active")
+          : t("common.notActive")}
       </span>
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          setActiveItemId((prev) => (prev === library.id ? null : library.id));
-        }}
-        className="cursor-pointer p-5"
-      >
-        <i
-          className={`${
-            theme == "light" ? "" : "text-gray-300"
-          } bi bi-three-dots`}
-        ></i>
-      </button>
 
-      {isOpen && (
-        <div
-          onClick={(e) => {
-            e.stopPropagation();
-
-            Boolean(library?.is_active) ? handleDeactivate() : handleActivate();
-          }}
-          className={`${
-            theme == "light" ? "bg-white " : "bg-gray-700"
-          } absolute -bottom-5 z-10 -right-2 p-3 transition-all duration-300 shadow-lg rounded`}
-        >
-          <button>
-            <span
+      {!fav && (
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setActiveItemId((prev) =>
+                prev === library.id ? null : library.id
+              );
+            }}
+            className="cursor-pointer p-5"
+          >
+            <i
               className={`${
-                theme == "light" ? "text-gray-600" : "text-white"
-              } block cursor-pointer text-[14px]  rounded-lg`}
-            >
-              {library?.is_active ? "Deactivate" : "Activation"}
-            </span>
+                theme == "light" ? "" : "text-gray-300"
+              } bi bi-three-dots`}
+            ></i>
           </button>
-        </div>
+
+          {isOpen && (
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+
+                Boolean(library?.is_active)
+                  ? handleDeactivate()
+                  : handleActivate();
+              }}
+              className={`${
+                theme == "light" ? "bg-white " : "bg-gray-700"
+              } absolute -bottom-5 z-10 -right-2 p-3 transition-all duration-300 shadow-lg rounded`}
+            >
+              <button>
+                <span
+                  className={`${
+                    theme == "light" ? "text-gray-600" : "text-white"
+                  } block cursor-pointer text-[14px]  rounded-lg`}
+                >
+                  {library?.is_active
+                    ? t("common.Deactivate")
+                    : t("common.Activation")}
+                </span>
+              </button>
+            </div>
+          )}
+        </>
       )}
     </li>
   );

@@ -2,9 +2,12 @@ import { NavLink } from "react-router-dom";
 import { useThemeStore } from "../store/useThemeStore";
 
 import Logo from "../assets/images/Logo.png";
+import { useTranslation } from "react-i18next";
 
 export default function LeftComponent() {
   const { theme } = useThemeStore();
+
+  const { t } = useTranslation();
 
   return (
     <aside className="">
@@ -23,66 +26,47 @@ export default function LeftComponent() {
         </div>
         <div className="p-[0_24px]">
           <nav className="">
-            <NavLink
-              to="/books"
-              className={({ isActive }) =>
-                `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-black hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
-     flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
-              }
-            >
-              <i className="bi bi-journal"></i>
-              Books
-            </NavLink>
-            <NavLink
-              to="/libraries"
-              className={({ isActive }) =>
-                `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
-     flex gap-4 text-[16px] group font-semibold mb-2 w-full text-center`
-              }
-            >
-              <i className={`bi bi-journal-bookmark-fill`}></i>
-              Libraries
-            </NavLink>
-            <NavLink
-              to="/favorites"
-              className={({ isActive }) =>
-                `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
-     flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
-              }
-            >
-              <i className="bi bi-star"></i>
-              Favorites
-            </NavLink>
-            <NavLink
-              to="/addlibrary"
-              className={({ isActive }) =>
-                `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
-     flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
-              }
-            >
-              <i className="bi bi-building-add"></i>
-              Add Library
-            </NavLink>
-            <NavLink
-              to="/profile"
-              className={({ isActive }) =>
-                `${isActive ? "bg-[#4880FF] text-white" : ""} 
-     ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
-     py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
-     flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
-              }
-            >
-              <i className="bi bi-person-lines-fill"></i>
-              Profile
-            </NavLink>
+            {[
+              {
+                to: "/books",
+                label: t("leftComponent.books"),
+                icon: "bi bi-journal",
+              },
+              {
+                to: "/libraries",
+                label: t("leftComponent.libraries"),
+                icon: "bi bi-journal-bookmark-fill",
+              },
+              {
+                to: "/favorites",
+                label: t("leftComponent.favorites"),
+                icon: "bi bi-star",
+              },
+              {
+                to: "/addlibrary",
+                label: t("leftComponent.AddToLibrary"),
+                icon: "bi bi-building-add",
+              },
+              {
+                to: "/profile",
+                label: t("leftComponent.profile"),
+                icon: "bi bi-person-lines-fill",
+              },
+            ].map((item) => (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `${isActive ? "bg-[#4880FF] text-white" : ""} 
+       ${theme === "light" ? "text-[#202224] hover:text-white" : "text-white"} 
+       py-5 px-4 rounded-lg transition-all hover:bg-[#487fffc7] duration-200 
+       flex gap-4 text-[16px] font-semibold mb-2 w-full text-center`
+                }
+              >
+                <i className={item.icon}></i>
+                {item.label}
+              </NavLink>
+            ))}
           </nav>
         </div>
       </div>

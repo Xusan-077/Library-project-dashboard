@@ -10,9 +10,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { API } from "../../API/API";
 import { queryClient } from "../main";
+import { useTranslation } from "react-i18next";
 
 export default function Profile() {
   const { theme } = useThemeStore();
+  const { t } = useTranslation();
+
   const { user, setIsAuth, setUser, logout } = useAuthStore();
   const [logOut, setLogOut] = useState(false);
   const [editModal, setEditModal] = useState(false);
@@ -93,7 +96,7 @@ export default function Profile() {
                   theme == "light" ? "text-[#202224]" : "text-gray-300"
                 } text-[18px]`}
               >
-                Log out
+                {t("profile.logout")}
               </span>
               <span
                 onClick={() => setLogOut(false)}
@@ -226,7 +229,7 @@ export default function Profile() {
             theme == "light" ? "text-black" : "text-white"
           } text-[32px] font-bold mb-[27px]`}
         >
-          Profile
+          {t("profile.title")}
         </h2>
 
         <div
@@ -252,7 +255,9 @@ export default function Profile() {
                     className={`text-white text-[16px] bi bi-pencil-square`}
                   ></i>
                 </span>
-                <span className="text-white text-[16px]">Edit Profile</span>
+                <span className="text-white text-[16px]">
+                  {t("profile.edit")}
+                </span>
               </button>
               <button
                 onClick={() => setLogOut(true)}
@@ -261,7 +266,9 @@ export default function Profile() {
                 <span className="text-[16px]">
                   <i className="text-white text-[16px] bi bi-box-arrow-right"></i>
                 </span>
-                <span className="text-white text-[16px]"> Log out</span>
+                <span className="text-white text-[16px]">
+                  {t("profile.logout")}
+                </span>
               </button>
             </div>
           </div>
@@ -272,7 +279,7 @@ export default function Profile() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[14px] text-[#979797] font-semibold mb-1">
-                  Name
+                  {t("profile.name")}
                 </span>
                 <span
                   className={`${
@@ -289,7 +296,7 @@ export default function Profile() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[14px] text-[#979797] font-semibold mb-1">
-                  Phone
+                  {t("profile.phone")}
                 </span>
                 <span
                   className={`${

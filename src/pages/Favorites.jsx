@@ -5,9 +5,14 @@ import BookItem from "../components/BookItem";
 import LibraryItem from "../components/LibraryItem";
 import { useQuery } from "@tanstack/react-query";
 import { queryClient } from "../main";
+import { useTranslation } from "react-i18next";
 
 export default function Favorites() {
   const { theme } = useThemeStore();
+  const { t } = useTranslation();
+
+  const [deleteItemId, setDeleteItemId] = useState(null);
+
   const { FavoriteBooks, FavoriteLibrarys, updateFavoriteLibraries } =
     useFavoriteStore();
 
@@ -52,7 +57,7 @@ export default function Favorites() {
             theme == "light" ? "text-black" : "text-white"
           } text-[32px] font-bold mb-[27px]`}
         >
-          Favorites
+          {t("favorites.title")}
         </h2>
         <div
           className={`${
@@ -82,7 +87,7 @@ export default function Favorites() {
               "books" == tabs ? "text-gray-600" : ""
             } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
           >
-            My favorite books
+            {t("favorites.MyFavBooks")}
           </div>
           <div
             onClick={() => setTabs("library")}
@@ -94,7 +99,7 @@ export default function Favorites() {
               "library" == tabs ? "text-gray-600" : ""
             } p-[15px_20px] border-l text-center font-semibold cursor-pointer`}
           >
-            My favorite Library
+            {t("favorites.MyFavLibrary")}
           </div>
         </div>
 
@@ -106,54 +111,55 @@ export default function Favorites() {
                   theme == "light"
                     ? "bg-[#FCFDFD] border-b-[#D5D5D5] "
                     : "bg-[#323D4EFF] border-none"
-                } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_1fr_1fr_130px_100px] items-center`}
+                } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_1fr_1fr_130px] items-center`}
               >
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  Like
+                  {t("common.like")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  NAME
+                  {t("common.name")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  ADDRESS
+                  {t("common.address")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  TOTAl
+                  {t("common.total")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  STATUS
-                </span>
-                <span
-                  className={`${
-                    theme == "light" ? "" : "text-gray-300"
-                  } px-4 py-3 text-center text-[14px] font-bold`}
-                >
-                  ACTIONS
+                  {t("common.status")}
                 </span>
               </div>
               <ul className="">
                 {FavoriteBooks.length ? (
-                  FavoriteBooks.map((el) => <BookItem key={el.id} book={el} />)
+                  FavoriteBooks.map((el) => (
+                    <BookItem
+                      setDeleteItemId={setDeleteItemId}
+                      deleteItemId={deleteItemId}
+                      fav
+                      key={el.id}
+                      book={el}
+                    />
+                  ))
                 ) : (
                   <div className="flex h-[500px] items-center justify-center gap-3">
                     <i className="text-red-700 text-[30px]  bi bi-search"></i>
@@ -172,49 +178,42 @@ export default function Favorites() {
                   theme == "light"
                     ? "bg-[#FCFDFD] border-b-[#D5D5D5] "
                     : "bg-[#323D4EFF] border-none"
-                } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_1fr_1fr_130px_100px] items-center`}
+                } p-[0_20px] rounded-t-lg border-b grid grid-cols-[60px_1fr_1fr_1fr_130px] items-center`}
               >
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  Like
+                  {t("common.like")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  NAME
+                  {t("common.name")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  ADDRESS
+                  {t("common.address")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  TOTAl
+                  {t("common.total")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  STATUS
-                </span>
-                <span
-                  className={`${
-                    theme == "light" ? "" : "text-gray-300"
-                  } px-4 py-3 text-center text-[14px] font-bold`}
-                >
-                  ACTIONS
+                  {t("common.status")}
                 </span>
               </div>
               <ul className="">
@@ -224,6 +223,7 @@ export default function Favorites() {
                       activeItemId={activeItemId}
                       setActiveItemId={setActiveItemId}
                       key={el.id}
+                      fav
                       library={el}
                     />
                   ))
