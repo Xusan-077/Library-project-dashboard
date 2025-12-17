@@ -16,7 +16,7 @@ export default function Layout() {
       <aside
         className={`${
           theme == "light" ? " bg-white" : "bg-[#273142FF] border-none"
-        } max-[1200px]:hidden fixed top-0 left-0 h-screen w-60 z-20`}
+        } max-[1150px]:hidden fixed top-0 left-0 h-screen w-60 z-20`}
       >
         <LeftComponent />
       </aside>
@@ -26,12 +26,12 @@ export default function Layout() {
           theme == "light"
             ? "border-gray-300 bg-white"
             : "bg-[#273142FF] border-none"
-        } max-[1200px]:w-full max-[1200px]:top-0 max-[1200px]:left-0 fixed top-0 shadow-bottom left-60 w-[calc(100%-240px)] z-110`}
+        } max-[1150px]:w-full max-[1150px]:top-0 max-[1150px]:left-0 fixed top-0 shadow-bottom left-60 w-[calc(100%-240px)] z-110`}
       >
         <Header />
       </header>
 
-      <main className="p-[30px] ml-60 mt-20 max-[1200px]:mb-25">
+      <main className="p-[30px] ml-60 max-[1150px]:ml-0 mt-20 max-[1150px]:mt-25">
         <Outlet />
       </main>
     </div>

@@ -46,19 +46,35 @@ export default function BookDetailPage() {
   return (
     <section className="">
       {deleteModal && (
-        <div className="fixed top-0 left-0 bg-[#0007] w-full flex items-center justify-center h-screen z-200">
-          <div className={`bg-white max-w-[400px] w-full p-[25px] rounded-lg`}>
+        <div className="fixed top-0 left-0 bg-[#0004] w-full flex items-center justify-center h-screen z-200">
+          <div
+            className={`${
+              theme == "light" ? "bg-white" : "bg-[#323D4EFF]"
+            } max-w-[400px] w-full p-[25px] rounded-lg`}
+          >
             <div className="flex justify-between items-center border-b border-b-[#e5e7eb] mb-2">
-              <span className={`text-[18px]`}>Delete book</span>
+              <span
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } text-[18px]`}
+              >
+                Delete book
+              </span>
               <span
                 onClick={() => setDeleteModal(false)}
-                className={`cursor-pointer text-[25px]`}
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } cursor-pointer text-[25px]`}
               >
                 &times;
               </span>
             </div>
             <div className="">
-              <p className="mb-3 text-[18px] text-center">
+              <p
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } mb-3 text-[18px] text-center`}
+              >
                 Are you sure to delete book
                 <span className="text-red-500 underline ml-2">
                   {data?.name}

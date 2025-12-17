@@ -26,9 +26,9 @@ API.interceptors.response.use(
 
       window.location.href = "/login";
     }
-    if (err.response?.status === 404) {
-      toast.warning("Data not found 404 error");
-    }
+    // if (err.response?.status === 404) {
+    //   toast.warning("Data not found 404 error");
+    // }
     return Promise.reject(err);
   }
 );

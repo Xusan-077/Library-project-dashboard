@@ -18,15 +18,14 @@ export default function LibraryItem({
   const navigate = useNavigate();
 
   const { mutate: activateLibrary } = useMutation({
-    mutationFn: async (Id) => {
-      const res = await API.patch(`/libraries/library/activate/${Id}/`);
-
+    mutationFn: async ({ id, body }) => {
+      const res = await API.patch(`/libraries/library/activate/${id}/`, body);
       return res?.data;
     },
     onSuccess: () => {
-      toast.success("Success activate library");
+      toast.success("Library activated successfully");
       setActiveItemId(null);
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(["libraries"]);
     },
     onError: () => {
       toast.error("Failed to activate library");
@@ -34,15 +33,14 @@ export default function LibraryItem({
   });
 
   const { mutate: deactivateLibrary } = useMutation({
-    mutationFn: async (Id) => {
-      const res = await API.patch(`/libraries/library/deactivate/${Id}/`);
-
+    mutationFn: async ({ id, body }) => {
+      const res = await API.patch(`/libraries/library/deactivate/${id}/`, body);
       return res?.data;
     },
     onSuccess: () => {
-      toast.success("Success deactivate library");
+      toast.success("Library deactivated successfully");
       setActiveItemId(null);
-      queryClient.invalidateQueries();
+      queryClient.invalidateQueries(["libraries"]);
     },
     onError: () => {
       toast.error("Failed to deactivate library");
@@ -50,16 +48,17 @@ export default function LibraryItem({
   });
 
   function handleActivate() {
-    activateLibrary(library?.id);
-
-    console.log("id", library?.id);
-    console.log("library", library);
+    activateLibrary({
+      id: library?.id,
+      body: { is_active: true },
+    });
   }
-  function handleDeactivate() {
-    deactivateLibrary(library?.id);
 
-    console.log("id", library?.id);
-    console.log("library", library);
+  function handleDeactivate() {
+    deactivateLibrary({
+      id: library?.id,
+      body: { is_active: false },
+    });
   }
 
   return (

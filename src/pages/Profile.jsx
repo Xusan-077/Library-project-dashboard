@@ -82,18 +82,34 @@ export default function Profile() {
     <div className="">
       {logOut && (
         <div className="fixed top-0 left-0 bg-[#0007] w-full flex items-center justify-center h-screen z-200">
-          <div className={`bg-white max-w-[400px] w-full p-[25px] rounded-lg`}>
+          <div
+            className={`${
+              theme == "light" ? "bg-white" : "bg-[#323D4EFF]"
+            } max-w-[400px] w-full p-[25px] rounded-lg`}
+          >
             <div className="flex justify-between items-center border-b border-b-[#e5e7eb] mb-2">
-              <span className={`text-[18px]`}>Log out</span>
+              <span
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } text-[18px]`}
+              >
+                Log out
+              </span>
               <span
                 onClick={() => setLogOut(false)}
-                className={`cursor-pointer text-[25px]`}
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } cursor-pointer text-[25px]`}
               >
                 &times;
               </span>
             </div>
             <div className="">
-              <p className="mb-3 text-[18px] text-center">
+              <p
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } mb-3 text-[18px] text-center`}
+              >
                 Are you sure to log out
               </p>
               <div className="flex items-center gap-2 justify-end">
@@ -120,13 +136,25 @@ export default function Profile() {
       )}
 
       {editModal && (
-        <div className="fixed top-0 left-0 bg-[#0007] w-full flex items-center justify-center h-screen z-200">
-          <div className={`bg-white max-w-[400px] w-full p-[25px] rounded-lg`}>
+        <div className="fixed top-0 left-0 bg-[#0004] w-full flex items-center justify-center h-screen z-200">
+          <div
+            className={`${
+              theme == "light" ? "bg-white" : "bg-[#323D4EFF]"
+            }  max-w-[550px] w-full p-[25px] rounded-lg`}
+          >
             <div className="flex justify-between items-center border-b border-b-[#e5e7eb] mb-2">
-              <span className={`text-[18px]`}>Edit profile</span>
+              <span
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } text-[18px]`}
+              >
+                Edit profile
+              </span>
               <span
                 onClick={() => setEditModal(false)}
-                className={`cursor-pointer text-[25px]`}
+                className={`${
+                  theme == "light" ? "text-[#202224]" : "text-gray-300"
+                } cursor-pointer text-[25px]`}
               >
                 &times;
               </span>
@@ -137,12 +165,20 @@ export default function Profile() {
                 className="flex flex-col"
               >
                 <label className="mb-3 flex flex-col">
-                  <span className="text-[18px] font-semibold text-[#202224] mb-[15px]">
+                  <span
+                    className={`${
+                      theme == "light" ? "text-[#202224]" : "text-gray-300"
+                    } text-[18px] font-semibold text-[#202224] mb-[15px]`}
+                  >
                     Name:
                   </span>
                   <input
                     type="text"
-                    className="h-15 p-[0_15px] border-[#D8D8D8] outline-none  border rounded-lg bg-[#F1F4F9]"
+                    className={`${
+                      theme == "light"
+                        ? "bg-[#F1F4F9]"
+                        : "text-white placeholder:text-white"
+                    } h-15 p-[0_15px] border-[#D8D8D8] outline-none  border rounded-lg`}
                     name="name"
                     {...register("name")}
                     defaultValue={userAction?.name}
@@ -151,12 +187,20 @@ export default function Profile() {
                   <span className="">{errors?.name?.message}</span>
                 </label>
                 <label className="mb-3 flex flex-col">
-                  <span className="text-[18px] font-semibold text-[#202224] mb-[15px]">
+                  <span
+                    className={`${
+                      theme == "light" ? "text-[#202224]" : "text-gray-300"
+                    } text-[18px] font-semibold  mb-[15px]`}
+                  >
                     Phone:
                   </span>
                   <input
                     type="phone"
-                    className="h-15 p-[0_15px] border-[#D8D8D8]  outline-none border rounded-lg bg-[#F1F4F9]"
+                    className={`${
+                      theme == "light"
+                        ? "bg-[#F1F4F9]"
+                        : "text-white placeholder:text-white"
+                    } h-15 p-[0_15px] border-[#D8D8D8]  outline-none border rounded-lg`}
                     name="text"
                     {...register("phone")}
                     defaultValue={userAction?.phone}

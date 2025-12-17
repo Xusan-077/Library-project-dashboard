@@ -126,7 +126,7 @@ export default function AddLibraries() {
 
         <div className="w-full flex justify-center">
           <div
-            className={`${theme === "light" ? "bg-white" : "bg-gray-800"}
+            className={`${theme === "light" ? "bg-white" : "bg-[#273142FF]"}
          rounded-lg p-[30px]
          w-full max-[425px]:rounded-none`}
           >

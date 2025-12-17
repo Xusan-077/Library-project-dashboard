@@ -1,15 +1,48 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFavoriteStore } from "../store/useFavoriteStore";
 import { useThemeStore } from "../store/useThemeStore";
 import BookItem from "../components/BookItem";
 import LibraryItem from "../components/LibraryItem";
+import { useQuery } from "@tanstack/react-query";
+import { queryClient } from "../main";
 
 export default function Favorites() {
   const { theme } = useThemeStore();
-  const { FavoriteBooks, FavoriteLibrarys } = useFavoriteStore();
+  const { FavoriteBooks, FavoriteLibrarys, updateFavoriteLibraries } =
+    useFavoriteStore();
 
   const [activeItemId, setActiveItemId] = useState(null);
   const [tabs, setTabs] = useState("books");
+
+  const { data: libraries } = useQuery({
+    queryFn: async () => {
+      const res = await API.get(`libraries/libraries/`);
+      return res?.data;
+    },
+    queryKey: ["libraries"],
+  });
+
+  useEffect(() => {
+    if (!libraries) return;
+    const updatedFavoriteLibraries = FavoriteLibrarys.map((fav) => {
+      const library = libraries.find((lib) => lib.id === fav.id);
+
+      if (!library) return fav;
+
+      return {
+        ...fav,
+        is_active: library.is_active,
+      };
+    });
+
+    updateFavoriteLibraries(updatedFavoriteLibraries);
+  }, [libraries]);
+
+  useEffect(() => {
+    queryClient.invalidateQueries({
+      queryKey: ["libraries"],
+    });
+  }, [FavoriteLibrarys]);
 
   return (
     <div className="">
@@ -190,7 +223,6 @@ export default function Favorites() {
                     <LibraryItem
                       activeItemId={activeItemId}
                       setActiveItemId={setActiveItemId}
-                      F
                       key={el.id}
                       library={el}
                     />
@@ -199,7 +231,7 @@ export default function Favorites() {
                   <div className="flex h-[500px] items-center justify-center gap-3">
                     <i className="text-red-700 text-[30px]  bi bi-search"></i>
                     <span className="text-red-500 text-[30px]">
-                      Book not found
+                      Libraries not found
                     </span>
                   </div>
                 )}

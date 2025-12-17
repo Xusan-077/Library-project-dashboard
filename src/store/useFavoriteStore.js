@@ -35,4 +35,9 @@ export const useFavoriteStore = create((set, get) => ({
     set({ FavoriteLibrarys: updatedFavorites });
     localStorage.setItem("favoriteLibraries", JSON.stringify(updatedFavorites));
   },
+
+  updateFavoriteLibraries: (libraries) => {
+    set({ FavoriteLibrarys: libraries });
+    localStorage.setItem("favoriteLibraries", JSON.stringify(libraries));
+  },
 }));

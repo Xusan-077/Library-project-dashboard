@@ -15,7 +15,11 @@ export default function Libraries() {
 
   const pageSize = 9;
 
-  const { data: libraries, isLoading: librariesLoading } = useQuery({
+  const {
+    data: libraries,
+    isLoading: librariesLoading,
+    error: libraryError,
+  } = useQuery({
     queryFn: async () => {
       const res = await API.get(`libraries/libraries/`);
       return res?.data;
@@ -23,7 +27,6 @@ export default function Libraries() {
     queryKey: ["libraries"],
   });
 
-  // SORT + FILTER + SEARCH
   const LibrariesSort = useMemo(() => {
     if (!libraries) return [];
 
@@ -80,7 +83,7 @@ export default function Libraries() {
         <div className="">
           <div className="">
             <div className="">
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex gap-5 items-center justify-between mb-6">
                 <div
                   className={`${
                     theme == "light"
@@ -181,75 +184,86 @@ export default function Libraries() {
                   ))}
                 </div>
 
-                <ul className="">
-                  {librariesLoading ? (
-                    Array.from({ length: 10 }).map((_, index) => (
-                      <Sikleton key={index} />
-                    ))
-                  ) : LibrariesSort.length ? (
-                    pagination.map((el) => (
-                      <LibraryItem
-                        activeItemId={activeItemId}
-                        setActiveItemId={setActiveItemId}
-                        key={el.id}
-                        library={el}
-                      />
-                    ))
-                  ) : (
-                    <div className="flex h-[500px] items-center justify-center gap-3">
-                      <i className="text-red-700 text-[30px]  bi bi-search"></i>
-                      <span className="text-red-500 text-[30px]">
-                        Liblary not found
-                      </span>
-                    </div>
-                  )}
-                </ul>
-
-                {/* PAGINATION */}
-                <div className="flex items-center justify-between mt-5">
-                  <span
-                    className={`${
-                      theme == "light" ? "text-[#202224]" : "text-[#979797]"
-                    } text-[14px] font-semibold`}
-                  >
-                    Showing {start + 1}-{Math.min(end, totalItems)} of{" "}
-                    {totalItems}
-                  </span>
-
-                  <div
-                    className={`${
-                      theme == "light"
-                        ? "border-gray-300"
-                        : "bg-[#323D4EFF] border-gray-500"
-                    } flex justify-end max-w-[90px] w-full items-center border rounded-lg`}
-                  >
-                    <button
-                      disabled={page === 1}
-                      onClick={() => setPage((p) => p - 1)}
-                      className={`${
-                        theme == "light" ? "border-gray-300" : "border-gray-500"
-                      } w-[45px] h-10 border-r disabled:opacity-50 flex items-center justify-center`}
-                    >
-                      <i
-                        className={`${
-                          theme == "light" ? "text-[#202224]" : "text-white"
-                        } text-[18px] bi bi-arrow-left`}
-                      ></i>
-                    </button>
-
-                    <button
-                      disabled={page === totalPages}
-                      onClick={() => setPage((p) => p + 1)}
-                      className="w-[45px] h-10 disabled:opacity-50 flex items-center justify-center"
-                    >
-                      <i
-                        className={`${
-                          theme == "light" ? "text-[#202224]" : "text-white"
-                        } text-[18px] bi bi-arrow-right`}
-                      ></i>
-                    </button>
+                {libraryError ? (
+                  <div className="flex h-[500px] items-center justify-center gap-3">
+                    <i className="text-red-700 text-[30px]  bi bi-search"></i>
+                    <span className="text-red-500 text-[30px]">
+                      Libraries not found
+                    </span>
                   </div>
-                </div>
+                ) : (
+                  <div className="">
+                    <ul className="">
+                      {librariesLoading ? (
+                        Array.from({ length: 10 }).map((_, index) => (
+                          <Sikleton key={index} />
+                        ))
+                      ) : LibrariesSort.length ? (
+                        pagination.map((el) => (
+                          <LibraryItem
+                            activeItemId={activeItemId}
+                            setActiveItemId={setActiveItemId}
+                            key={el.id}
+                            library={el}
+                          />
+                        ))
+                      ) : (
+                        <div className="flex h-[500px] items-center justify-center gap-3">
+                          <i className="text-red-700 text-[30px]  bi bi-search"></i>
+                          <span className="text-red-500 text-[30px]">
+                            Liblary not found
+                          </span>
+                        </div>
+                      )}
+                    </ul>
+                    <div className="flex items-center justify-between mt-5">
+                      <span
+                        className={`${
+                          theme == "light" ? "text-[#202224]" : "text-[#979797]"
+                        } text-[14px] font-semibold`}
+                      >
+                        Showing {start + 1}-{Math.min(end, totalItems)} of{" "}
+                        {totalItems}
+                      </span>
+
+                      <div
+                        className={`${
+                          theme == "light"
+                            ? "border-gray-300"
+                            : "bg-[#323D4EFF] border-gray-500"
+                        } flex justify-end max-w-[90px] w-full items-center border rounded-lg`}
+                      >
+                        <button
+                          disabled={page === 1}
+                          onClick={() => setPage((p) => p - 1)}
+                          className={`${
+                            theme == "light"
+                              ? "border-gray-300"
+                              : "border-gray-500"
+                          } w-[45px] h-10 border-r disabled:opacity-50 flex items-center justify-center`}
+                        >
+                          <i
+                            className={`${
+                              theme == "light" ? "text-[#202224]" : "text-white"
+                            } text-[18px] bi bi-arrow-left`}
+                          ></i>
+                        </button>
+
+                        <button
+                          disabled={page === totalPages}
+                          onClick={() => setPage((p) => p + 1)}
+                          className="w-[45px] h-10 disabled:opacity-50 flex items-center justify-center"
+                        >
+                          <i
+                            className={`${
+                              theme == "light" ? "text-[#202224]" : "text-white"
+                            } text-[18px] bi bi-arrow-right`}
+                          ></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
