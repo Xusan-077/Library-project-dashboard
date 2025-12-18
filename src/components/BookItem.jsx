@@ -165,7 +165,7 @@ export default function BookItem({
                       theme == "light" ? "text-[#202224]" : "text-gray-300"
                     } mb-3 text-[18px] text-center`}
                   >
-                    Are you sure to delete book
+                    {t("modal.bookDelet.text")}
                     <span className="text-red-500 underline ml-2">
                       {book?.name}
                     </span>
@@ -175,7 +175,7 @@ export default function BookItem({
                       onClick={() => bookDelete(book?.id)}
                       className="cursor-pointer p-[8px_20px] bg-red-500 text-white rounded-lg"
                     >
-                      delete
+                      {t("common.delete")}
                     </button>
                     <button
                       onClick={() => {
@@ -184,7 +184,7 @@ export default function BookItem({
                       }}
                       className="cursor-pointer p-[8px_20px] bg-gray-400 text-white rounded-lg"
                     >
-                      cancle
+                      {t("common.cancel")}
                     </button>
                   </div>
                 </div>

@@ -64,6 +64,24 @@
     "logout": "Log out"
   },
 
+  "modal": {
+    "bookDelet": {
+      "text": "Are you sure to delete book"
+    }
+  },
+
+  "bookDetail": {
+    "title": "Book Detail"
+  },
+
+  "libraryDetail": {
+    "title": "Library Detail",
+    "info": "info about library",
+    "socialNetworks": "social networks",
+    "LibraryAddress": "Library Address",
+    "totalBooks": "Total books"
+  },
+
   "common": {
     "like": "Like",
     "name": "Name",
@@ -75,10 +93,17 @@
     "publisher": "Publisher",
     "showing": "Showing",
     "of": "of",
+    "phone": "Phone",
     "active": "Active",
     "notActive": "Not Active",
     "lotNook": "Lot books",
     "Deactivate": "Deactivate",
-    "Activation": "Activation"
+    "Activation": "Activation",
+    "delete": "delete",
+    "cancel": "cancel",
+    "book": "books",
+    "deleteBook": "Delete book",
+    "quantity": "Quantity",
+    "library": "Library"
   }
 }

@@ -7,18 +7,19 @@ import {
   YMaps,
   Map,
   Placemark,
-  FullscreenControl,
   GeolocationControl,
   ZoomControl,
 } from "@pbe/react-yandex-maps";
 
 import BookItem from "../components/BookItem";
+import { useTranslation } from "react-i18next";
 
 export default function LibraryDetailPage() {
   const { theme } = useThemeStore();
   const { libraryId } = useParams();
 
   const isTheme = theme == "light";
+  const { t } = useTranslation();
 
   const { data } = useQuery({
     queryFn: async () => {
@@ -32,7 +33,7 @@ export default function LibraryDetailPage() {
   console.log(data);
 
   return (
-    <section className="">
+    <section className="mb-5">
       <div className="">
         <div className="">
           <h2
@@ -40,7 +41,7 @@ export default function LibraryDetailPage() {
               theme == "light" ? "text-black" : "text-white"
             } text-[32px] font-bold mb-[27px]`}
           >
-            Library Detail
+            {t("libraryDetail.title")}
           </h2>
 
           <div className="grid grid-cols-2 gap-5 mb-5">
@@ -62,7 +63,7 @@ export default function LibraryDetailPage() {
                         isTheme ? "" : "text-white"
                       } text-[22px] font-semibold`}
                     >
-                      info about library
+                      {t("libraryDetail.info")}
                     </h2>
                   </div>
 
@@ -77,7 +78,7 @@ export default function LibraryDetailPage() {
                           isTheme ? "text-gray-700" : "text-gray-300"
                         } text-[14px] font-medium min-w-[120px]`}
                       >
-                        Address:
+                        {t("common.address")}:
                       </span>
                       <span
                         className={`${
@@ -97,7 +98,7 @@ export default function LibraryDetailPage() {
                           isTheme ? "text-gray-700" : "text-gray-300"
                         } text-[14px] font-medium min-w-[120px]`}
                       >
-                        Phone:
+                        {t("common.phone")}:
                       </span>
                       <span
                         className={`${
@@ -128,7 +129,7 @@ export default function LibraryDetailPage() {
                         isTheme ? "" : "text-white"
                       } text-[22px] font-semibold`}
                     >
-                      social networks
+                      {t("libraryDetail.socialNetworks")}
                     </h2>
                   </div>
 
@@ -229,7 +230,7 @@ export default function LibraryDetailPage() {
                       isTheme ? "" : "text-white"
                     } text-[22px] font-semibold`}
                   >
-                    Library Address
+                    {t("libraryDetail.LibraryAddress")}
                   </h2>
                 </div>
                 <div className="flex-1">
@@ -288,7 +289,7 @@ export default function LibraryDetailPage() {
                   isTheme ? "" : "text-gray-300"
                 } text-[20px] font-semibold`}
               >
-                Total books
+                {t("libraryDetail.totalBooks")}
               </div>
             </div>
           </div>
@@ -303,56 +304,49 @@ export default function LibraryDetailPage() {
                   theme == "light"
                     ? "bg-[#FCFDFD] border-b-[#D5D5D5] "
                     : "bg-[#323D4EFF] border-none"
-                } p-[0_20px] rounded-t-lg border-b  grid grid-cols-[60px_1fr_1fr_1fr_130px_100px] items-center`}
+                } p-[0_20px] rounded-t-lg border-b  grid grid-cols-[60px_1fr_1fr_1fr_130px] items-center`}
               >
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  Like
+                  {t("common.like")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  NAME
+                  {t("common.name")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  ADDRESS
+                  {t("common.author")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  TOTAl
+                  {t("common.publisher")}
                 </span>
                 <span
                   className={`${
                     theme == "light" ? "" : "text-gray-300"
                   } px-4 py-3 text-[14px] font-bold`}
                 >
-                  STATUS
-                </span>
-                <span
-                  className={`${
-                    theme == "light" ? "" : "text-gray-300"
-                  } px-4 py-3 text-center text-[14px] font-bold`}
-                >
-                  ACTIONS
+                  {t("common.total")}
                 </span>
               </div>
               <div className="">
                 {data?.results?.books ? (
                   data?.results?.books?.length ? (
                     data?.results?.books?.map((el) => (
-                      <BookItem key={el.id} book={el} />
+                      <BookItem fav key={el.id} book={el} />
                     ))
                   ) : (
                     <div className="flex h-[500px] items-center justify-center gap-3">
@@ -363,7 +357,7 @@ export default function LibraryDetailPage() {
                     </div>
                   )
                 ) : (
-                  ""
+                  Array.from
                 )}
               </div>
             </div>

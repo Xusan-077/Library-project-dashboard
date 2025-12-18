@@ -4,11 +4,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useThemeStore } from "../store/useThemeStore";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BookDetailPage() {
   const { theme } = useThemeStore();
   const { bookId } = useParams();
   const [deleteModal, setDeleteModal] = useState(false);
+
+  const { t } = useTranslation();
 
   const isTheme = theme == "light";
   const navigate = useNavigate();
@@ -106,7 +109,7 @@ export default function BookDetailPage() {
               theme == "light" ? "text-black" : "text-white"
             } text-[32px] font-bold mb-[27px]`}
           >
-            Book Detail
+            {t("bookDetail.title")}
           </h2>
 
           <div
@@ -140,7 +143,7 @@ export default function BookDetailPage() {
                 >
                   <i className="text-white bi bi-trash3"></i>
                   <span className={` text-white  text-[16px]`}>
-                    delete book
+                    {t("common.deleteBook")}
                   </span>
                 </button>
               </div>
@@ -163,7 +166,7 @@ export default function BookDetailPage() {
                         isTheme ? "text-gray-700" : "text-gray-300"
                       } text-[14px] font-medium`}
                     >
-                      Author
+                      {t("common.author")}
                     </h3>
                     <span
                       className={`${
@@ -192,7 +195,7 @@ export default function BookDetailPage() {
                         isTheme ? "text-gray-700" : "text-gray-300"
                       } text-[14px] font-medium`}
                     >
-                      Publisher
+                      {t("common.publisher")}
                     </h3>
                     <span
                       className={`${
@@ -221,7 +224,7 @@ export default function BookDetailPage() {
                         isTheme ? "text-gray-700" : "text-gray-300"
                       } text-[14px] font-medium`}
                     >
-                      Quantity
+                      {t("common.quantity")}
                     </h3>
                     <span
                       className={`${
@@ -253,7 +256,7 @@ export default function BookDetailPage() {
                         isTheme ? "text-gray-700" : "text-gray-300"
                       } text-[14px] font-medium`}
                     >
-                      Library
+                      {t("common.library")}
                     </h3>
                     <span
                       className={`${
