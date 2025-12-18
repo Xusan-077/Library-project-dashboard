@@ -6,6 +6,7 @@
   },
 
   "leftComponent": {
+    "dashboard": "Boshqaruv paneli",
     "books": "Kitoblar",
     "libraries": "Kutubxonalar",
     "favorites": "Sevimlilar",
@@ -34,7 +35,26 @@
   },
 
   "addLibrary": {
-    "title": "Qo‘shish"
+    "title": "Kutubxona qo‘shish",
+    "labelName": "Nomi",
+    "labelPhone": "Telefon",
+    "LabelPassword": "Parol",
+    "LabelRent": "Kitobni ijaraga berish mumkin",
+    "Latitude": "Kenglik",
+    "Longitude": "Uzunlik",
+    "submit": "Yuborish",
+    "address": "Manzil"
+  },
+
+  "dashboard": {
+    "title": "Dashboard",
+    "totalLibrary": "Umumiy kutubxonalar",
+    "ourTotalLibrary": "Bizning umumiy kutubxonalarimiz",
+    "ActiveLibrary": "Faol kutubxonalar",
+    "ourActiveLibrary": "Bizning faol kutubxonalarimiz",
+    "totalBooks": "Umumiy kitoblar",
+    "OurTotalBooks": "Bizning umumiy kitoblarimiz",
+    "DealsDetails": "Shartnoma tafsilotlari"
   },
 
   "profile": {

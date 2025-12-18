@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
 import { useThemeStore } from "../store/useThemeStore";
 
-import Logo from "../assets/images/Logo.png";
 import { useTranslation } from "react-i18next";
+import { useLeftComponent } from "../store/useLeftComponent";
 
 export default function LeftComponent() {
   const { theme } = useThemeStore();
@@ -12,21 +12,14 @@ export default function LeftComponent() {
   return (
     <aside className="">
       <div className="p-[24px_0]">
-        <div className="mb-[30px]">
-          <div className="flex justify-center gap-2">
-            <img src={Logo} alt="" className="w-10 h-10" />
-            <span
-              className={`${
-                theme == "light" ? "text-[#202224]" : "text-white"
-              } text-[24px] font-bold text-center`}
-            >
-              LibraSpace
-            </span>
-          </div>
-        </div>
         <div className="p-[0_24px]">
           <nav className="">
             {[
+              {
+                to: "/",
+                label: t("leftComponent.dashboard"),
+                icon: "bi bi-border-all",
+              },
               {
                 to: "/books",
                 label: t("leftComponent.books"),

@@ -16,7 +16,7 @@ export default function Libraries() {
 
   const [activeItemId, setActiveItemId] = useState(null);
 
-  const pageSize = 9;
+  const pageSize = 8;
 
   const {
     data: libraries,

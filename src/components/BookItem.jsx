@@ -8,7 +8,13 @@ import { queryClient } from "../main";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function BookItem({ book, fav, deleteItemId, setDeleteItemId }) {
+export default function BookItem({
+  book,
+  fav,
+  dash,
+  deleteItemId,
+  setDeleteItemId,
+}) {
   const { t } = useTranslation();
 
   const { theme } = useThemeStore();
@@ -37,19 +43,22 @@ export default function BookItem({ book, fav, deleteItemId, setDeleteItemId }) {
     },
   });
 
+  const bgClass =
+    theme === "light"
+      ? "bg-white border-[#D5D5D5]"
+      : "bg-[#252E3EFF] border-b-[#323D4EFF]";
+  const gridClass = !fav
+    ? "grid grid-cols-[60px_1fr_1fr_1fr_130px_100px]"
+    : "grid grid-cols-[60px_1fr_1fr_1fr_130px]";
+
   return (
     <li
       onClick={(e) => {
         e.stopPropagation();
-
         navigate(`/book/${book?.id}`);
       }}
-      className={`${
-        theme == "light"
-          ? "bg-white border-[#D5D5D5]"
-          : "bg-[#252E3EFF] border-b-[#323D4EFF]"
-      } ${
-        !fav ? "grid grid-cols-[60px_1fr_1fr_1fr_130px_100px]" : "grid grid-cols-[60px_1fr_1fr_1fr_130px]"
+      className={`${bgClass} ${gridClass} ${
+        dash ? "bg-transparent" : ""
       } border-b p-[0_20px] relative cursor-pointer items-center`}
     >
       <button
@@ -105,7 +114,7 @@ export default function BookItem({ book, fav, deleteItemId, setDeleteItemId }) {
             <div
               onClick={(e) => {
                 e.stopPropagation();
-                setDeleteModal(false);
+                setDeleteModal(true);
               }}
               className={`${
                 theme == "light" ? "bg-white " : "bg-gray-700"
@@ -187,13 +196,11 @@ export default function BookItem({ book, fav, deleteItemId, setDeleteItemId }) {
             onClick={(e) => {
               e.stopPropagation();
 
-              Boolean(deleteItemId)
-                ? setDeleteItemId(null)
-                : setDeleteItemId(book?.id);
+              deleteItemId ? setDeleteItemId(null) : setDeleteItemId(book?.id);
             }}
             className={`${
               theme == "light" ? "" : "text-gray-300"
-            } text-[14px] cursor-pointer font-bold p-5 flex justify-center`}
+            } text-[14px] cursor-pointer font-bold p-4.5 flex justify-center`}
           >
             <i className={`text-[20px] bi bi-three-dots`}></i>
           </button>

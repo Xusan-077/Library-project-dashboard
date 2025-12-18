@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import Books from "./pages/Books";
 import Libraries from "./pages/Libraries";
@@ -10,6 +10,7 @@ import BookDetailPage from "./pages/BookDetailPage";
 import { ToastContainer } from "react-toastify";
 import Favorites from "./pages/Favorites";
 import { useThemeStore } from "./store/useThemeStore";
+import Dashboard from "./pages/Dashboard";
 
 export default function App() {
   const { theme } = useThemeStore();
@@ -18,15 +19,17 @@ export default function App() {
     <>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Books />} />
-          <Route path="/books" element={<Books />} />
-          <Route path="/favorites" element={<Favorites />} />
-          <Route path="/book/:bookId" element={<BookDetailPage />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/libraries" element={<Libraries />} />
-          <Route path="/library/:libraryId" element={<LibraryDetailPage />} />
-          <Route path="/addlibrary" element={<AddLibraries />} />
+          <Route path="/" element={<Dashboard />} />
+          <Route path="books" element={<Books />} />
+          <Route path="favorites" element={<Favorites />} />
+          <Route path="book/:bookId" element={<BookDetailPage />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="libraries" element={<Libraries />} />
+          <Route path="library/:libraryId" element={<LibraryDetailPage />} />
+          <Route path="addlibrary" element={<AddLibraries />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
+
         <Route path="/login" element={<Login />} />
       </Routes>
 

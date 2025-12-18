@@ -11,8 +11,12 @@ import { useNavigate } from "react-router-dom";
 import i18n from "../i18next";
 import { useTranslation } from "react-i18next";
 
+import Logo from "../assets/images/Logo.png";
+import { useLeftComponent } from "../store/useLeftComponent";
+
 export default function Header() {
   const navigate = useNavigate();
+  const { setFull } = useLeftComponent();
 
   const { t } = useTranslation();
 
@@ -51,18 +55,31 @@ export default function Header() {
   useEffect(() => {
     const lng = localStorage.getItem("lang");
 
-    setLang(lng);
+    setLang(lng || "en");
   }, []);
 
   return (
-    <div className="flex items-center justify-between p-5">
-      <button>
-        <i
-          className={`${
-            theme == "light" ? "" : "text-white"
-          } cursor-pointer text-[30px] bi bi-list`}
-        ></i>
-      </button>
+    <div className="flex items-center justify-between p-[15px_30px]">
+      <div className="flex gap-[60px]">
+        <div className="flex justify-center gap-2">
+          <img src={Logo} alt="" className="w-10 h-10" />
+          <span
+            className={`${
+              theme == "light" ? "text-[#202224]" : "text-white"
+            } text-[24px] font-bold text-center`}
+          >
+            LibraSpace
+          </span>
+        </div>
+
+        {/* <button onClick={() => setFull()}>
+          <i
+            className={`${
+              theme == "light" ? "" : "text-white"
+            } cursor-pointer text-[30px] bi bi-list`}
+          ></i>
+        </button> */}
+      </div>
 
       <div className="flex items-center gap-5">
         <button
@@ -91,10 +108,10 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <img
                   src={
-                    lang == "uz"
-                      ? uz
-                      : lang == "en"
+                    lang == "en"
                       ? en
+                      : lang == "uz"
+                      ? uz
                       : lang == "ru"
                       ? ru
                       : ""

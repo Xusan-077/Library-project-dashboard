@@ -74,7 +74,7 @@ export default function Login() {
               {...register("phone")}
               placeholder="Enter phone"
             />
-            <span className="">{errors?.phone?.message}</span>
+            <span className="text-red-500 ml-2">{errors?.phone?.message}</span>
           </label>
           <label className="mb-[55px] flex flex-col">
             <span className="text-[18px] font-semibold text-[#202224] mb-[15px]">
@@ -87,7 +87,9 @@ export default function Login() {
               {...register("password")}
               placeholder="Enter password"
             />
-            <span className="">{errors?.password?.message}</span>
+            <span className="text-red-500 ml-2">
+              {errors?.password?.message}
+            </span>
           </label>
           <button
             className="w-full bg-[#4880FF] p-[15px_0] text-[20px] font-bold text-white rounded-lg"

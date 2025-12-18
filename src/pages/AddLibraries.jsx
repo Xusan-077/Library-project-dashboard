@@ -144,7 +144,7 @@ export default function AddLibraries() {
                         theme === "light" ? "text-gray-700" : "text-white"
                       } mb-2.5 block`}
                     >
-                      Name
+                      {t("addLibrary.labelName")}
                     </span>
 
                     <input
@@ -172,7 +172,7 @@ export default function AddLibraries() {
                         theme === "light" ? "text-gray-700" : "text-white"
                       } mb-2.5 block`}
                     >
-                      Phone
+                      {t("addLibrary.labelPhone")}
                     </span>
 
                     <input
@@ -199,7 +199,7 @@ export default function AddLibraries() {
                         theme === "light" ? "text-gray-700" : "text-white"
                       } mb-2.5 block`}
                     >
-                      Password
+                      {t("addLibrary.LabelPassword")}
                     </span>
 
                     <input
@@ -340,7 +340,7 @@ export default function AddLibraries() {
                           theme === "light" ? "text-gray-700" : "text-white"
                         } mb-2.5 block`}
                       >
-                        can rent book
+                        {t("addLibrary.LabelRent")}
                       </span>
 
                       <select
@@ -370,7 +370,7 @@ export default function AddLibraries() {
                           theme === "light" ? "text-gray-700" : "text-white"
                         } mb-2.5 block`}
                       >
-                        Address
+                        {t("addLibrary.address")}
                       </span>
 
                       <input
@@ -391,8 +391,6 @@ export default function AddLibraries() {
                         </p>
                       )}
                     </label>
-
-                    {/* latitude */}
                   </div>
                 </div>
                 <div className="flex items-center gap-[30px] w-full mt-[30px]">
@@ -402,7 +400,7 @@ export default function AddLibraries() {
                         theme === "light" ? "text-gray-700" : "text-white"
                       } mb-2.5 block`}
                     >
-                      Latitude
+                      {t("addLibrary.Latitude")}
                     </span>
 
                     <input
@@ -431,7 +429,7 @@ export default function AddLibraries() {
                         theme === "light" ? "text-gray-700" : "text-white"
                       } mb-2.5 block`}
                     >
-                      Longitude
+                      {t("addLibrary.Longitude")}
                     </span>
 
                     <input
@@ -460,7 +458,7 @@ export default function AddLibraries() {
                   className="p-2.5 bg-[#4880FF] cursor-pointer text-white rounded-lg text-[18px] max-w-[200px] w-full"
                   type="submit"
                 >
-                  Submit
+                  {t("addLibrary.submit")}
                 </button>
               </div>
             </form>

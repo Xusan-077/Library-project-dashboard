@@ -6,11 +6,23 @@
   },
 
   "leftComponent": {
+    "dashboard": "Панель",
     "books": "Книги",
     "libraries": "Библиотеки",
     "favorites": "Избранное",
     "AddToLibrary": "Добавить",
     "profile": "Профиль"
+  },
+
+  "dashboard": {
+    "title": "Панель",
+    "totalLibrary": "Всего библиотек",
+    "ourTotalLibrary": "Наши библиотеки",
+    "ActiveLibrary": "Активные библиотеки",
+    "ourActiveLibrary": "Наши активные библиотеки",
+    "totalBooks": "Всего книг",
+    "OurTotalBooks": "Наши книги",
+    "DealsDetails": "Детали сделок"
   },
 
   "books": {
@@ -34,7 +46,15 @@
   },
 
   "addLibrary": {
-    "title": "Добавить"
+    "title": "Добавить библиотеку",
+    "labelName": "Название",
+    "labelPhone": "Телефон",
+    "LabelPassword": "Пароль",
+    "LabelRent": "Можно арендовать книгу",
+    "Latitude": "Широта",
+    "Longitude": "Долгота",
+    "submit": "Отправить",
+    "address": "Адрес"
   },
 
   "profile": {

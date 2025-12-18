@@ -6,11 +6,23 @@
   },
 
   "leftComponent": {
+    "dashboard": "Dashboard",
     "books": "Books",
     "libraries": "Libraries",
     "favorites": "Favorites",
     "AddToLibrary": "Add Library",
     "profile": "Profile"
+  },
+
+  "dashboard": {
+    "title": "Dashboard",
+    "totalLibrary": "Total Libraries",
+    "ourTotalLibrary": "Our total libraies",
+    "ActiveLibrary": "Active Libraries",
+    "ourActiveLibrary": "Our active libraries",
+    "totalBooks": "Total books",
+    "OurTotalBooks": "Our total books",
+    "DealsDetails": "Deals Details"
   },
 
   "books": {
@@ -33,7 +45,15 @@
   },
 
   "addLibrary": {
-    "title": "Add library"
+    "title": "Add library",
+    "labelName": "Name",
+    "labelPhone": "Phone",
+    "LabelPassword": "Password",
+    "LabelRent": "can rent book",
+    "Latitude": "Latitude",
+    "Longitude": "Longitude",
+    "submit": "Submit",
+    "address": "Address"
   },
 
   "profile": {
