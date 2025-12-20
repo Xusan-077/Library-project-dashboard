@@ -2,49 +2,52 @@
   "header": {
     "user": "Foydalanuvchi",
     "admin": "Admin",
-    "language": "Tilni tanlash"
+    "language": "Til"
   },
   "leftComponent": {
     "dashboard": "Bosh sahifa",
     "books": "Kitoblar",
     "libraries": "Kutubxonalar",
-    "favorites": "Sevimlilar",
-    "AddToLibrary": "qo'shish",
+    "favorites": "Saralangan",
+    "AddToLibrary": "Qo‘shish",
     "profile": "Profil"
   },
   "dashboard": {
     "title": "Bosh sahifa",
-    "totalLibrary": "Jami kutubxonalar",
-    "ActiveLibrary": "Faol kutubxonalar",
-    "totalBooks": "Jami kitoblar",
-    "DealsDetails": "Shartnoma tafsilotlari"
+    "totalLibrary": "Jami kutubxona",
+    "ourTotalLibrary": "Bizninglar",
+    "ActiveLibrary": "Faol",
+    "ourActiveLibrary": "Faol bizniki",
+    "totalBooks": "Jami kitob",
+    "OurTotalBooks": "Bizning kitoblar",
+    "DealsDetails": "Ma’lumot"
   },
   "books": {
     "title": "Kitoblar",
-    "filterAll": "Barcha kitoblar",
+    "filterAll": "Barchasi",
     "search": "Kitob qidirish",
-    "notFound": "Kitob topilmadi",
-    "deleteBook": "Kitobni o‘chirish"
+    "notFound": "Topilmadi",
+    "deleteBook": "O‘chirish"
   },
   "libraries": {
     "title": "Kutubxonalar",
-    "search": "Kutubxona qidirish",
-    "notFound": "Kutubxona topilmadi"
+    "search": "Qidirish",
+    "notFound": "Topilmadi"
   },
   "favorites": {
-    "title": "Sevimlilar",
-    "MyFavBooks": "Sevimli kitoblarim",
-    "MyFavLibrary": "Sevimli kutubxonalarim"
+    "title": "Saralangan",
+    "MyFavBooks": "Sevimli kitoblar",
+    "MyFavLibrary": "Sevimli kutubxonalar"
   },
   "addLibrary": {
-    "title": "Kutubxona qo‘shish",
-    "labelName": "Ism",
+    "title": "Qo‘shish",
+    "labelName": "Nomi",
     "labelPhone": "Telefon",
     "LabelPassword": "Parol",
-    "LabelRent": "Kitob ijaraga berish mumkin",
+    "LabelRent": "Ijaraga berish",
     "Latitude": "Kenglik",
     "Longitude": "Uzunlik",
-    "submit": "Jo‘natish",
+    "submit": "Saqlash",
     "address": "Manzil"
   },
   "profile": {
@@ -55,37 +58,41 @@
     "logout": "Chiqish"
   },
   "modal": {
-    "bookDelet": { "text": "Kitobni o‘chirishga ishonchingiz komilmi?" }
+    "bookDelet": {
+      "text": "Kitob o‘chirilsinmi?"
+    }
   },
-  "bookDetail": { "title": "Kitob tafsilotlari" },
+  "bookDetail": {
+    "title": "Kitob haqida"
+  },
   "libraryDetail": {
-    "title": "Kutubxona tafsilotlari",
-    "info": "Kutubxona haqida ma’lumot",
+    "title": "Kutubxona",
+    "info": "Ma’lumot",
     "socialNetworks": "Ijtimoiy tarmoqlar",
-    "LibraryAddress": "Kutubxona manzili",
-    "totalBooks": "Jami kitoblar"
+    "LibraryAddress": "Manzil",
+    "totalBooks": "Kitoblar"
   },
   "common": {
-    "like": "Yoqtirish",
-    "name": "Ism",
+    "like": "Yoqdi",
+    "name": "Nomi",
     "address": "Manzil",
     "total": "Jami",
     "status": "Holat",
-    "actions": "Harakatlar",
+    "actions": "Amallar",
     "author": "Muallif",
     "publisher": "Nashriyot",
-    "showing": "Ko‘rsatildi",
+    "showing": "Ko‘rsat",
     "of": "dan",
     "phone": "Telefon",
     "active": "Faol",
     "notActive": "Faol emas",
     "lotNook": "Ko‘p kitob",
     "Deactivate": "O‘chirish",
-    "Activation": "Faollashtirish",
+    "Activation": "Yoqish",
     "delete": "O‘chirish",
-    "cancel": "Bekor qilish",
+    "cancel": "Bekor",
     "book": "Kitoblar",
-    "deleteBook": "Kitobni o‘chirish",
+    "deleteBook": "O‘chirish",
     "quantity": "Soni",
     "library": "Kutubxona"
   }

@@ -2,7 +2,7 @@
   "header": {
     "user": "Пользователь",
     "admin": "Админ",
-    "language": "Выбрать язык"
+    "language": "Язык"
   },
   "leftComponent": {
     "dashboard": "Панель",
@@ -15,21 +15,24 @@
   "dashboard": {
     "title": "Панель",
     "totalLibrary": "Всего библиотек",
-    "ActiveLibrary": "Активные библиотеки",
+    "ourTotalLibrary": "Наши библиотеки",
+    "ActiveLibrary": "Активные",
+    "ourActiveLibrary": "Наши активные",
     "totalBooks": "Всего книг",
-    "DealsDetails": "Детали сделок"
+    "OurTotalBooks": "Наши книги",
+    "DealsDetails": "Детали"
   },
   "books": {
     "title": "Книги",
-    "filterAll": "Все книги",
+    "filterAll": "Все",
     "search": "Поиск книги",
-    "notFound": "Книги не найдены",
-    "deleteBook": "Удалить книгу"
+    "notFound": "Не найдено",
+    "deleteBook": "Удалить"
   },
   "libraries": {
     "title": "Библиотеки",
-    "search": "Поиск библиотеки",
-    "notFound": "Библиотека не найдена"
+    "search": "Поиск",
+    "notFound": "Не найдено"
   },
   "favorites": {
     "title": "Избранное",
@@ -37,36 +40,40 @@
     "MyFavLibrary": "Любимые библиотеки"
   },
   "addLibrary": {
-    "title": "Добавить библиотеку",
+    "title": "Добавить",
     "labelName": "Имя",
     "labelPhone": "Телефон",
     "LabelPassword": "Пароль",
-    "LabelRent": "Можно сдавать книги",
+    "LabelRent": "Аренда",
     "Latitude": "Широта",
     "Longitude": "Долгота",
-    "submit": "Отправить",
+    "submit": "Сохранить",
     "address": "Адрес"
   },
   "profile": {
     "title": "Профиль",
     "name": "Имя",
     "phone": "Телефон",
-    "edit": "Редактировать",
-    "logout": "Выйти"
+    "edit": "Редакт.",
+    "logout": "Выход"
   },
   "modal": {
-    "bookDelet": { "text": "Вы уверены, что хотите удалить книгу?" }
+    "bookDelet": {
+      "text": "Удалить книгу?"
+    }
   },
-  "bookDetail": { "title": "Детали книги" },
+  "bookDetail": {
+    "title": "О книге"
+  },
   "libraryDetail": {
-    "title": "Детали библиотеки",
-    "info": "Информация о библиотеке",
+    "title": "О библиотеке",
+    "info": "Инфо",
     "socialNetworks": "Соцсети",
-    "LibraryAddress": "Адрес библиотеки",
-    "totalBooks": "Всего книг"
+    "LibraryAddress": "Адрес",
+    "totalBooks": "Книги"
   },
   "common": {
-    "like": "Нравится",
+    "like": "Лайк",
     "name": "Имя",
     "address": "Адрес",
     "total": "Всего",
@@ -74,19 +81,19 @@
     "actions": "Действия",
     "author": "Автор",
     "publisher": "Издатель",
-    "showing": "Показано",
+    "showing": "Показ",
     "of": "из",
     "phone": "Телефон",
-    "active": "Активно",
-    "notActive": "Не активно",
+    "active": "Активен",
+    "notActive": "Неактивен",
     "lotNook": "Много книг",
-    "Deactivate": "Деактивировать",
-    "Activation": "Активировать",
+    "Deactivate": "Откл.",
+    "Activation": "Вкл.",
     "delete": "Удалить",
     "cancel": "Отмена",
     "book": "Книги",
-    "deleteBook": "Удалить книгу",
-    "quantity": "Количество",
+    "deleteBook": "Удалить",
+    "quantity": "Кол-во",
     "library": "Библиотека"
   }
 }
