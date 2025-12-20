@@ -16,9 +16,11 @@ export default function Profile() {
   const { theme } = useThemeStore();
   const { t } = useTranslation();
 
-  const { user, setIsAuth, setUser, logout } = useAuthStore();
+  const { setIsAuth, setUser, logout } = useAuthStore();
   const [logOut, setLogOut] = useState(false);
   const [editModal, setEditModal] = useState(false);
+
+  const access = localStorage.getItem("access");
 
   const { data: userAction } = useQuery({
     queryFn: async () => {
@@ -27,6 +29,7 @@ export default function Profile() {
       return res?.data;
     },
     queryKey: ["user Data"],
+    enabled: !!access,
   });
 
   const { mutate: editProfile } = useMutation({
@@ -48,7 +51,6 @@ export default function Profile() {
 
   const navigate = useNavigate();
 
-  const access = localStorage.getItem("access");
   const refresh = localStorage.getItem("refresh");
 
   useEffect(() => {

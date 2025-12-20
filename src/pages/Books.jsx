@@ -15,6 +15,8 @@ export default function Books() {
 
   const [deleteItemId, setDeleteItemId] = useState(null);
 
+  const access = localStorage.getItem("access");
+
   const {
     data: books,
     isLoading: librariesLoading,
@@ -27,6 +29,7 @@ export default function Books() {
     },
 
     queryKey: ["books"],
+    enabled: !!access,
   });
 
   useEffect(() => {

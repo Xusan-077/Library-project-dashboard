@@ -18,6 +18,8 @@ export default function Libraries() {
 
   const pageSize = 8;
 
+  const access = localStorage.getItem("access");
+
   const {
     data: libraries,
     isLoading: librariesLoading,
@@ -28,6 +30,7 @@ export default function Libraries() {
       return res?.data;
     },
     queryKey: ["libraries"],
+    enabled: !!access,
   });
 
   useEffect(() => {
