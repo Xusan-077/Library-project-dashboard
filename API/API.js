@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: "https://infections-plays-sewing-finding.trycloudflare.com/api/v1",
+  baseURL: import.meta.env.VITE_API_URL,
 });
 
 API.interceptors.request.use((config) => {
