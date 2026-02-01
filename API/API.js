@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: "https://infections-plays-sewing-finding.trycloudflare.com/api/v1",
 });
 
 API.interceptors.request.use((config) => {
@@ -20,11 +20,9 @@ API.interceptors.response.use(
   },
 
   (err) => {
-    if (err.response?.status === 401 || err.response?.status === 403) {
+    if (err.response?.status === 401) {
       localStorage.clear();
-
-      window.location.href = "/login";
     }
     return Promise.reject(err);
-  }
+  },
 );

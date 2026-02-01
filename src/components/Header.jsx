@@ -12,12 +12,9 @@ import i18n from "../i18next";
 import { useTranslation } from "react-i18next";
 
 import Logo from "../assets/images/Logo.png";
-import { useLeftComponent } from "../store/useLeftComponent";
 
 export default function Header() {
   const navigate = useNavigate();
-  const { setFull } = useLeftComponent();
-
   const { t } = useTranslation();
 
   const [lang, setLang] = useState("en");
@@ -71,14 +68,6 @@ export default function Header() {
             LibraSpace
           </span>
         </div>
-
-        {/* <button onClick={() => setFull()}>
-          <i
-            className={`${
-              theme == "light" ? "" : "text-white"
-            } cursor-pointer text-[30px] bi bi-list`}
-          ></i>
-        </button> */}
       </div>
 
       <div className="flex items-center gap-5">
@@ -111,10 +100,10 @@ export default function Header() {
                     lang == "en"
                       ? en
                       : lang == "uz"
-                      ? uz
-                      : lang == "ru"
-                      ? ru
-                      : ""
+                        ? uz
+                        : lang == "ru"
+                          ? ru
+                          : ""
                   }
                   alt=""
                   className="w-11 h-[30px]"
@@ -127,10 +116,10 @@ export default function Header() {
                   {lang == "uz"
                     ? "Uzbek"
                     : lang == "en"
-                    ? "English"
-                    : lang == "ru"
-                    ? "Russian"
-                    : ""}
+                      ? "English"
+                      : lang == "ru"
+                        ? "Russian"
+                        : ""}
                 </span>
               </div>
               <div className="">

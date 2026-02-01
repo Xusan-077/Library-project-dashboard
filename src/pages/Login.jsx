@@ -30,7 +30,7 @@ export default function Login() {
 
   const { mutate: loginToProfile } = useMutation({
     mutationFn: async (body) => {
-      const res = await API.post("/auth/login/", body);
+      const res = await API.post("/auth/admin/profile/", body);
 
       return res?.data;
     },
